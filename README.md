@@ -1,4 +1,4 @@
-# C++Assignment June 2021
+# Programming Concepts, C++Assignment Group 45
 ### Deadline @ 30th of August
 
 
@@ -16,4 +16,21 @@ int function(int a, int b)
     int addition = a + b; // add two numbers
     return addition;
 }
+```
+
+### Creating your own namespace functions
+#### Namespace allows you to differentiate two functions with the same name
+```cpp
+// Creating your own namespace for functions in the standard library
+namespace R {
+    float round(x, place) {
+        int dec = pow(10, place);
+        float value = (int)(var * dec + 0.5);
+        return (float)value / dec;
+    }
+}
+
+R::round(10.2341, 2);
+std::round(10.2341);
+
 ```
