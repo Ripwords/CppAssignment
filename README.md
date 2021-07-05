@@ -5,7 +5,10 @@
 ### Job distribution
 | **Tasks** | **Description** | **By** |
 | ---------- | ---------- | ---------- |
-| *task* | *details about the task* | *who is/are doing this task* |
+| Data Structure | Manage the input data and structuring of the data for later use | JJ |
+| Logic | Checking for the correct PIN and phone number | Osama & Harshi |
+| Generating Notifications | Generating the PIN, email and state of the locker | Zitang & Bunny |
+| Interface of the program | UI/UX for the program | Bryan |
 
 
 ### Try to leave comments where you see fit while you write your code
