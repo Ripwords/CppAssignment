@@ -1,8 +1,18 @@
-#include <iostream>
+#include "dataProcessor.h"
+
+using namespace std;
+
+map<int, vector<vector<string>>> readFile(string filename);
+void searchData(map<int, vector<vector<string>>> data, int unit);
+vector<string> returnName(map<int, vector<vector<string>>> data, int unit);
 
 int main()
 {
-    std::cout << "Hello World";
-    std::cout << "bye!" << std::endl;
+    map<int, vector<vector<string>>> data = readFile("database.txt");
+
+    searchData(data, 12);
+
+    vector<string> names = returnName(data, 52);
+
     return 0;
 }
