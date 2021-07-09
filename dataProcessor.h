@@ -18,7 +18,7 @@ map<int, vector<vector<string>>> readFile(string filename)
 
     map<int, vector<vector<string>>> data;
 
-    auto storeData = [](map<int, vector<vector<string>>> &data, int unit, string name, string phone, string email, string ic)
+    auto storeData = [](auto &data, int unit, string name, string phone, string email, string ic)
     {
         if (data[unit][0].size() < 4)
         {
