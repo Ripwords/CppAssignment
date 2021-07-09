@@ -31,7 +31,7 @@
 *.app
 
 # PDF
-*.pdf
+# *.pdf
 
 # EXE
-*.exe
+# *.exe
