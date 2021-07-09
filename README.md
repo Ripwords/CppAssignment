@@ -6,12 +6,13 @@
 
 | **Tasks**          | **Description**                                           | **By**   |
 | ------------------------ | --------------------------------------------------------------- | -------------- |
-| Data Structure           | Manage the input data and structuring of the data for later use | JJ             |
+| Data Structure           | Manage the input data and structuring of the data               | JJ             |
 | Logic                    | Checking for the correct PIN and phone number                   | Osama & Harshi |
 | Generating Notifications | Generating the PIN, email and state of the locker               | Zitang & Bunny |
 | Interface of the program | UI/UX for the program                                           | Bryan          |
 
 ### Data Structure for this assignment
+#### Currently the data structure used is **map** that has an increasing order with a search time of *O(log(n))*, alternatively **unordered_map** can be used with no ordering with a search time of *O(1) or O(n)*. Thus map is more efficient and should be used unless no ordering is required at a later point
 ```cpp
 map<int, vector<vector<string>>> data = {
     {
