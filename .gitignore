@@ -36,3 +36,5 @@
 # EXE
 *.exe
 
+# JSON
+*.json
