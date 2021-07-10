@@ -15,24 +15,27 @@ map<int, vector<vector<string>>> readFile(string filename)
     string phone;
     string email;
     string ic;
+    string parcel;
 
     map<int, vector<vector<string>>> data;
 
-    auto storeData = [](auto &data, int unit, string name, string phone, string email, string ic)
+    auto storeData = [](auto &data, int unit, string name, string phone, string email, string ic, string parcel)
     {
-        if (data[unit][0].size() < 4)
+        if (data[unit][0].size() < 5)
         {
             data[unit][0].push_back(name);
             data[unit][0].push_back(phone);
             data[unit][0].push_back(email);
             data[unit][0].push_back(ic);
+            data[unit][0].push_back(parcel);
         }
-        else if (data[unit][0].size() > 3 && data[unit][1].size() < 4)
+        else if (data[unit][0].size() > 4 && data[unit][1].size() < 5)
         {
             data[unit][1].push_back(name);
             data[unit][1].push_back(phone);
             data[unit][1].push_back(email);
             data[unit][1].push_back(ic);
+            data[unit][1].push_back(parcel);
         }
         else
         {
@@ -45,16 +48,17 @@ map<int, vector<vector<string>>> readFile(string filename)
         getline(FILE, name, ',');
         getline(FILE, phone, ',');
         getline(FILE, email, ',');
-        getline(FILE, ic, '\n');
+        getline(FILE, ic, ',');
+        getline(FILE, parcel, '\n');
 
         if (data.find(stoi(unit)) == data.end())
         {
             data[stoi(unit)] = {{}, {}};
-            storeData(data, stoi(unit), name, phone, email, ic);
+            storeData(data, stoi(unit), name, phone, email, ic, parcel);
         }
         else
         {
-            storeData(data, stoi(unit), name, phone, email, ic);
+            storeData(data, stoi(unit), name, phone, email, ic, parcel);
         }
     }
 

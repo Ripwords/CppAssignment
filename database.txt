@@ -1,6 +1,6 @@
-12,JJ,0172147026,teohjjteoh@gmail.com,IC0172147
-12,MY,2344520,something@gmail.com,IC0123000
-52,LOL,0123456789,haha@gmail.com,IC0123
-123,HAHA,1238470,lol@gmail.com,IC243567
-52,fadds,123asd,fasd@gmafil.cosm,ICs1
-52,fas,123,fasd@gmail.com,IC1
+12,JJ,0172147026,teohjjteoh@gmail.com,IC0172147,parcel
+12,MY,2344520,something@gmail.com,IC0123000,noparcel
+52,LOL,0123456789,haha@gmail.com,IC0123,parcel
+123,HAHA,1238470,lol@gmail.com,IC243567,parcel
+52,fadds,123asd,fasd@gmafil.cosm,ICs1,noparcel
+52,fas,123,fasd@gmail.com,IC1,parcel
