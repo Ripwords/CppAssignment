@@ -33,7 +33,7 @@ int main()
         cout << "Enter the unit Number: ";
         
         cin >> unitNumber;
-        cout << "\t" << title << endl;
+        // cout << "\t" << title << endl;
         // searchData(data, unitNumber);
         phones = returnPhones(data, unitNumber);
         names = returnNames(data, unitNumber);

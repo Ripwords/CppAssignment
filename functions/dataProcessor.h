@@ -4,7 +4,7 @@ using namespace std;
 
 map<int, vector<vector<string>>> readFile(string filename)
 {
-    ifstream FILE(filename);
+    ifstream FILE;
     FILE.open(filename);
     if (!FILE) {
         cerr << "Error reading " << filename << endl;
