@@ -14,7 +14,7 @@
 ### Data Structure for this assignment
 #### Currently the data structure used is **map** that has an increasing order with a search time of *O(log(n))*, alternatively **unordered_map** can be used with no ordering with a search time of *O(1) or O(n)*. Thus map is more efficient and should be used unless no ordering is required at a later point
 ```cpp
-map<int, vector<vector<string>>> data = {
+map<int, vector<vector<string>>> userData = {
     {
         unitOne, {
             {name1, phone1, email1, ic1},
@@ -30,7 +30,8 @@ map<int, vector<vector<string>>> data = {
 }
 
 // Reference data using the follow format:
-data[unitNumber][userOne or userTwo][name or phone1 or email or ic]
+userData[unitNumber][userOne or userTwo][name or phone1 or email or ic]
+lockerData[lockerID][unit or status]
 ```
 
 ### Try to leave comments where you see fit while you write your code
