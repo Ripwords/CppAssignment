@@ -61,5 +61,4 @@ namespace R {
 
 R::round(10.2341, 2);
 std::round(10.2341);
-
 ```
