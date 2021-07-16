@@ -3,11 +3,6 @@
 
 using namespace std;
 
-map<int, vector<vector<string>>> readFile(string filename);
-void searchData(map<int, vector<vector<string>>> data, int unit);
-vector<string> returnNames(map<int, vector<vector<string>>> data, int unit);
-vector<string> returnPhones(map<int, vector<vector<string>>> data, int unit);
-
 int main()
 {
     auto data = readFile("database.txt");
@@ -17,29 +12,28 @@ int main()
     char choice;
     cout << "Specify if u r the user or the management ( a / b ): " << endl;
 
-    string phoneNumber;
     string OTP;
+    string phoneNumber;
     int unitNumber;
     vector<string> names;
-    vector<string> phones;
 
     string managementID;
     string managementPS;
+    bool isPhoneCorrect;
     cin >> choice;
 
     switch (choice)
     {
     case 'a':
         cout << "Enter the unit Number: ";
-        
         cin >> unitNumber;
+
+        cout << "Enter your phone number: ";
+        cin >> phoneNumber;
+        isPhoneCorrect = checkInfo(data, unitNumber, "phone", phoneNumber);
         // cout << "\t" << title << endl;
         // searchData(data, unitNumber);
-        phones = returnPhones(data, unitNumber);
-        names = returnNames(data, unitNumber);
-
-        cout << "Enter your Phone Number: ";
-        cin >> phoneNumber;
+        // names = returnNames(data, unitNumber);
 
         // TODO : function to check for phone number will be here
         // If User not Registered, tell him to contact the management.

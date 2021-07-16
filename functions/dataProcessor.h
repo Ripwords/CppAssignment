@@ -2,6 +2,12 @@
 
 using namespace std;
 
+map<string, int> dictionary = {
+    {"name", 0},
+    {"phone", 1},
+    {"email", 2},
+    {"ic", 3}};
+
 map<int, vector<vector<string>>> readFile(string filename)
 {
     ifstream FILE;
@@ -82,104 +88,46 @@ void searchData(map<int, vector<vector<string>>> data, int unit)
     }
 }
 
-vector<string> returnNames(map<int, vector<vector<string>>> data, int unit)
+vector<string> returnInfo(map<int, vector<vector<string>>> data, int unit, string dataCode)
 {
-    vector<string> names;
+    vector<string> info;
     try
     {
         for (int i = 0; i < 2; i++)
         {
             if (data[unit][i].size() > 3)
             {
-                names.push_back(data[unit][i][0]);
+                info.push_back(data[unit][i][dictionary[dataCode]]);
             }
         }
-        for (int i = 0; i < names.size(); i++)
-        {
-            cout << names[i] << endl;
-        }
+        // PRINTING OUT THE INFO
+        // for (int i = 0; i < info.size(); i++)
+        // {
+        //     cout << info[i] << endl;
+        // }
     }
     catch (const out_of_range)
     {
         cout << "Unit has not registered" << endl;
     }
 
-    return names;
+    return info;
 }
 
-vector<string> returnPhones(map<int, vector<vector<string>>> data, int unit)
+bool checkInfo(map<int, vector<vector<string>>> data, int unitNumber, string dataCode, string infoInput = "")
 {
-    vector<string> phones;
-    try
+    vector<string> info = returnInfo(data, unitNumber, dataCode);
+
+    if (infoInput != "")
     {
-        for (int i = 0; i < 2; i++)
+        if (find(info.begin(), info.end(), infoInput) != info.end())
         {
-            if (data[unit][i].size() > 3)
-            {
-                phones.push_back(data[unit][i][1]);
-            }
+            cout << "YAYYY";
+            return true;
         }
-        for (int i = 0; i < phones.size(); i++)
-        {
-            cout << phones[i] << endl;
-        }
+        cout << "NO";
+        return false;
     }
-    catch (const out_of_range)
-    {
-        cout << "Unit has not registered" << endl;
-    }
-
-    return phones;
-}
-
-vector<string> returnEmails(map<int, vector<vector<string>>> data, int unit)
-{
-    vector<string> emails;
-
-    try
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            if (data[unit][i].size() > 3)
-            {
-                emails.push_back(data[unit][i][2]);
-            }
-        }
-        for (int i = 0; i < emails.size(); i++)
-        {
-            cout << emails[i] << endl;
-        }
-    }
-    catch (const out_of_range)
-    {
-        cout << "Unit has not registered" << endl;
-    }
-
-    return emails;
-}
-
-vector<string> returnICs(map<int, vector<vector<string>>> data, int unit)
-{
-    vector<string> ics;
-
-    try
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            if (data[unit][i].size() > 3)
-            {
-                ics.push_back(data[unit][i][3]);
-            }
-        }
-        for (int i = 0; i < ics.size(); i++)
-        {
-            cout << ics[i] << endl;
-        }
-    }
-    catch (const out_of_range)
-    {
-        cout << "Unit has not registered" << endl;
-    }
-
-    return ics;
+    cout << "NOOO";
+    return false;
 }
