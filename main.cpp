@@ -25,6 +25,7 @@ int main()
     switch (choice)
     {
     case 'a':
+        draw_WELCOME();
         cout << "Enter the unit Number: ";
         cin >> unitNumber;
         cout << "HELLO";
