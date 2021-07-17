@@ -6,20 +6,18 @@ using namespace std;
 int main()
 {
     auto data = readFile("database.txt");
-
+    string OTP;
+    char choice;
+    int unitNumber;
+    string phoneNumber;
+    string managementPS;
+    string managementID;
+    bool isPhoneCorrect;
+    vector<string> names;
     string user_acc = "a";
     string manage_acc = "b";
-    char choice;
+
     cout << "Specify if u r the user or the management ( a / b ): " << endl;
-
-    string OTP;
-    string phoneNumber;
-    int unitNumber;
-    vector<string> names;
-
-    string managementID;
-    string managementPS;
-    bool isPhoneCorrect;
     cin >> choice;
 
     switch (choice)
@@ -28,7 +26,6 @@ int main()
         draw_WELCOME();
         cout << "Enter the unit Number: ";
         cin >> unitNumber;
-        cout << "HELLO";
 
         cout << "Enter your phone number: ";
         cin >> phoneNumber;
