@@ -27,6 +27,7 @@ int main()
     case 'a':
         cout << "Enter the unit Number: ";
         cin >> unitNumber;
+        cout << "HELLO";
 
         cout << "Enter your phone number: ";
         cin >> phoneNumber;
