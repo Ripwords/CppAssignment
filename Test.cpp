@@ -28,5 +28,6 @@ int main()
         cerr << "Invalid Input tg5g5";
         break;
     }
+    cout << "Hello.";
     return 0;
 }
