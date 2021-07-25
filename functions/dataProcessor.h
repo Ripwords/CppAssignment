@@ -111,7 +111,7 @@ vector<string> returnInfo(map<int, vector<vector<string>>> data, int unit, strin
     {
         for (int i = 0; i < 2; i++)
         {
-            if (data[unit][i].size() > 3)
+            if (data.at(unit)[i].size() > 3)
             {
                 info.push_back(data[unit][i][dictionary[dataCode]]);
             }
