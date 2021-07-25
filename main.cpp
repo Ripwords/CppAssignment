@@ -1,7 +1,7 @@
 #include "functions/dataProcessor.h"
 #include "prettyStrings/pretty.h"
+#include "functions/errorMsg.h"
 
-using namespace std;
 
 int main()
 {
@@ -13,6 +13,7 @@ int main()
     string managementPS;
     string managementID;
     bool isPhoneCorrect;
+    bool isUnitCorrect;
     vector<string> names;
     string user_acc = "a";
     string manage_acc = "b";
@@ -26,11 +27,20 @@ int main()
         draw_WELCOME();
         cout << "Enter the unit Number: ";
         cin >> unitNumber;
-
+        // There suppose to be a fucntion to return (unitNumber == 1 or True).
+        isUnitCorrect = 1;
+        //Delete Later
+        check_Data(isUnitCorrect);
+       
         cout << "Enter your phone number: ";
         cin >> phoneNumber;
         isPhoneCorrect = checkInfo(data, unitNumber, "phone", phoneNumber);
-        // cout << isPhoneCorrect;
+        cout << isPhoneCorrect;
+        check_Data(isPhoneCorrect);
+
+
+        cout << "its Working.";
+        
         // cout << "\t" << title << endl;
         // searchData(data, unitNumber);
         // names = returnNames(data, unitNumber);
@@ -54,7 +64,7 @@ int main()
         break;
 
     default:
-        cerr << "Invalid Input LOL";
+        cerr << "Invalid Input.";
         break;
     }
 
