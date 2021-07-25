@@ -41,3 +41,5 @@
 
 # JSON
 *.json
+
+FUNCTION_CHECKING.cpp

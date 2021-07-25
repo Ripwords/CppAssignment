@@ -217,12 +217,37 @@ void registerNew(map<int, vector<vector<string>>> &data, vector<string> registra
 // FUNCTION TO UPDATE EXISTING USER INFORMATION
 void updateData(map<int, vector<vector<string>>> &data, int unit, string dataCode, string update)
 {
-    data[unit][0][dictionary[dataCode]] = update;
+    if (data.find(unit) == data.end())
+    {
+        cerr << "ERROR unit not registered" << endl;
+    }
+    else
+    {
+        data[unit][0][dictionary[dataCode]] = update;
+    }
+}
+
+void deleteFromDatabase(map<int, vector<vector<string>>> &data, int unit, string ic)
+{
+    if (checkInfo(data, unit, "ic", ic))
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (ic == data.at(unit)[i][3])
+            {
+                data[unit][i].erase(data[unit][i].begin(), data[unit][i].end());
+                break;
+            }
+        }
+    }
+    else
+    {
+        cerr << "ERROR information incorrect" << endl;
+    }
 }
 
 // FUNCTION TO UPDATE THE DATABASE ( ONLY RUN THIS AT THE END OF MAINLOOP OR WHEN USERDATA IS MODIFIED FROM "updateData")
 void updateDatabase(map<int, vector<vector<string>>> &data, string filename)
-
 {
     ofstream FILE;
     FILE.open(filename, ios::out);
@@ -250,25 +275,4 @@ void updateDatabase(map<int, vector<vector<string>>> &data, string filename)
     }
 
     FILE.close();
-}
-
-void deleteFromDatabase(map<int, vector<vector<string>>> &data, vector<string> userInfo)
-{
-    int unit = stoi(userInfo[0]);
-    string name = userInfo[1];
-    string phone = userInfo[2];
-    string email = userInfo[3];
-    string ic = userInfo[4];
-
-    if (checkInfo(data, unit, "ic", ic))
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            if (ic == data[unit][i][4])
-            {
-                data[unit][i].clear();
-                cout << "removed user" << endl;
-            }
-        }
-    }
 }
