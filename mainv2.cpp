@@ -1,0 +1,38 @@
+#include "functions/functions.h"
+
+using namespace std;
+
+int main()
+{
+    // VARIABLES
+    string choice;
+    string managementID;
+    auto data = readFile("database.txt");
+    auto parcelData = readParcelData("parcelData.txt");
+
+    draw_WELCOME();
+    draw_TO();
+    draw_PARCEL_SYSTEM();
+    cout << "\n\t Please press ENTER to continue >>";
+    cin.get();
+    system("cls");
+    display_selection(choice);
+    system("cls");
+    draw_PARCEL_SYSTEM();
+    // Specify if the user is a resident or a management based on his choice (choice) || The inputs are 'R' for users and 'M' for management.
+    if (choice == "R")
+    {
+        residentLogIn(data);
+    }
+    else if (choice == "M")
+    {
+        managementLogIn();
+        managementOptions(data, parcelData);
+    }
+    else
+    {
+        cerr << "EERRRROORRRR" /*Write an error message*/ "" << endl;
+    }
+
+    return 0;
+}

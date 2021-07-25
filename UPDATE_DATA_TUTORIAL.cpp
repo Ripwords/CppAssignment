@@ -33,6 +33,6 @@ int main()
     // UPDATE THE DATABASE AT THE END OF MAIN LOOP
     // OR
     // UPDATE AT THE END OF UPDATE
-    updateDatabase(data, "database.txt");
+    updateUserDatabase(data, "database.txt");
     return 0;
 }

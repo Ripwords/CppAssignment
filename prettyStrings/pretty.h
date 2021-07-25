@@ -1,7 +1,9 @@
-#include <iostream> 
-using namespace std; 
- 
- 
+#include <iostream>
+#include <windows.h>
+#include <string>
+
+using namespace std;
+
 void draw_WELCOME(void) 
 { 
     cout << "  \t\t\tw       w   EEEE  LL      CCCC   OOO   M     M   EEEE\n"; 
@@ -26,5 +28,49 @@ void draw_PARCEL_SYSTEM(void)
     cout << "  \tPPPP   AAAAA  R RR   C      EEEEE  LL    \tSSSSS   YYY   SSSSS     TT     EEEEE  M M M M\n"; 
     cout << "  \tP      A   A  R  R   C      E      LL    \t    S    Y        S     TT     E      M  M  M\n";   
     cout << "  \tP      A   A  R   R   CCCC   EEEE  LLLLL \tSSSS     Y    SSSS      T       EEEE  M     M\n";
-    cout << "\n========================================================================================================";
-}  
+    cout << "\n========================================================================================================\n";
+}
+
+void display_selection(string &choice)
+{
+    cout << "\t                 \t\t|                     \n";
+    cout << "\t                 \t\t|                     \n";
+    cout << "\t*****************\t\t|\t\t***************  \n";
+    cout << "\t*               *\t\t|\t\t*             *  \n";
+    cout << "\t* Manangemnt(M) *\t\t|\t\t* Resident(R) *  \n";
+    cout << "\t*               *\t\t|\t\t*             *  \n";
+    cout << "\t*****************\t\t|\t\t***************  \n";
+    cout << "\t                 \t\t|                     \n";
+    cout << "\t                 \t\t|                     \n";
+    cout << "________________________________________________________________________\n";
+    cout << "\n\tPlease select the option (M/R) to continue >> ";
+    cin >> choice;
+}
+void draw_PARCEL_SYSTEM2()
+{
+    cout << " ######      #####    #######      #######  ########  ##      \t  ########  ##      ##   ########  ###########  ########  ##        ##   \n";
+    cout << " ##    ##  ##     ##  ##     ##   ##        ##        ##      \t ##         ##      ##  ##              ##      ##        ####    ####   \n";
+    cout << " ##    ##  ##     ##  ##     ##   ##        ##        ##      \t ##         ##      ##  ##              ##      ##        ## ##  ## ##   \n";
+    cout << " ######    #########  #######     ##        #######   ##      \t ########     ######    ########        ##      #######   ##  ####  ##   \n";
+    cout << " ##        ##     ##  ##    ##    ##        ##        ##      \t        ##      ##             ##       ##      ##        ##   ##   ##   \n";
+    cout << " ##        ##     ##  ##     ##   ##        ##        ##      \t        ##      ##             ##       ##      ##        ##        ##   \n";
+    cout << " ##        ##     ##  ##      ##   #######  ########  ########\t ########       ##      ########        ##      ########  ##        ##   \n";
+    cout << "\n//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\" << endl;
+}
+
+void display_RESIDENT_LOGIN(void)
+{
+    cout << "\n\t\t\t\t\t      >>>>>>>>>>>>>>>>>>>>>>>>\n";
+    cout << "\t\t\t\t\t      |                |      \n";
+    cout << "\t\t\t\t\t      | RESIDENT LOGIN |      \n";
+    cout << "\t\t\t\t\t      |                |      \n";
+    cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<      \n";
+}
+void display_MANAGEMENT_LOGIN(void)
+{
+    cout << "\n\t\t\t\t\t      >>>>>>>>>>>>>>>>>>>>>>>>>>\n";
+    cout << "\t\t\t\t\t      |                  |      \n";
+    cout << "\t\t\t\t\t      | MANAGEMENT LOGIN |      \n";
+    cout << "\t\t\t\t\t      |                  |      \n";
+    cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<<<      \n";
+}

@@ -88,6 +88,12 @@ void searchData(map<int, vector<vector<string>>> data, int unit)
 {
     try
     {
+        /*
+        PYTHON
+        for i in range(len(data[unit])):
+            for j in range(len(data[unit][i])):
+                print(data[unit][i][j])
+        */
         for (int i = 0; i < data.at(unit).size(); i++)
         {
             for (int j = 0; j < data.at(unit)[i].size(); j++)
@@ -247,7 +253,7 @@ void deleteFromDatabase(map<int, vector<vector<string>>> &data, int unit, string
 }
 
 // FUNCTION TO UPDATE THE DATABASE ( ONLY RUN THIS AT THE END OF MAINLOOP OR WHEN USERDATA IS MODIFIED FROM "updateData")
-void updateDatabase(map<int, vector<vector<string>>> &data, string filename)
+void updateUserDatabase(map<int, vector<vector<string>>> &data, string filename)
 {
     ofstream FILE;
     FILE.open(filename, ios::out);
@@ -275,4 +281,10 @@ void updateDatabase(map<int, vector<vector<string>>> &data, string filename)
     }
 
     FILE.close();
+}
+
+bool checkRegistration(map<int, vector<vector<string>>> data, int unit)
+{
+    bool unitExist = (data.find(unit) == data.end()) ? false : true;
+    return unitExist;
 }
