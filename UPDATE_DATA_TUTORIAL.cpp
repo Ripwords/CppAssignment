@@ -23,10 +23,19 @@ int main()
                           "TEST4",
                       });
 
+    // REMOVE USER
+    // deleteFromDatabase(data, {
+    //                              "66",
+    //                              "TEST1",
+    //                              "TEST2",
+    //                              "TEST3",
+    //                              "TEST4",
+    //                          });
+
     // SIMPLE CHECK FOR UPDATE
     cout << data[12][0][dictionary["ic"]] << endl;
-    cout << checkInfo(data, 12, "ic", newUpdate) << endl;
-    cout << checkInfo(data, 66, "ic", "TEST4") << endl;
+    // cout << checkInfo(data, 12, "ic", newUpdate) << endl;
+    // cout << checkInfo(data, 66, "ic", "TEST4") << endl;
 
     // UPDATE THE DATABASE AT THE END OF MAIN LOOP
     // OR
