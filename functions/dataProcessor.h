@@ -1,6 +1,6 @@
 #include "INCLUDES.h"
 
-using namespace std;
+
 
 // DATA PROCESSING
 // MAPPING INFORMATION TYPE TO DATA CODE FOR EASIER RETRIEVAL OF DATA FROM VECTORS
@@ -272,3 +272,4 @@ void deleteFromDatabase(map<int, vector<vector<string>>> &data, vector<string> u
         }
     }
 }
+
