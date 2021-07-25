@@ -130,9 +130,75 @@ bool checkInfo(map<int, vector<vector<string>>> data, int unitNumber, string dat
     return false;
 }
 
-// void registerNew(map<int, vector<vector<string>>> &data, vector<string> registration) {
+bool is_unitFull(map<int, vector<vector<string>>> data, int unit)
+{
+    if (data.find(unit) == data.end())
+    {
+        return false;
+    }
+    else
+    {
+        if (data[unit][0].size() < 4)
+        {
+            return false;
+        }
+        else if (data[unit][0].size() > 3 && data[unit][1].size() < 4)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+}
 
-// }
+void registerNew(map<int, vector<vector<string>>> &data, vector<string> registration)
+{
+    int unit = stoi(registration[0]);
+    string name = registration[1];
+    string phone = registration[2];
+    string email = registration[3];
+    string ic = registration[4];
+
+    auto storeData = [](map<int, vector<vector<string>>> &data, int unit, string name, string phone, string email, string ic)
+    {
+        if (data[unit][0].size() < 4)
+        {
+            data[unit][0].push_back(name);
+            data[unit][0].push_back(phone);
+            data[unit][0].push_back(email);
+            data[unit][0].push_back(ic);
+        }
+        else if (data[unit][0].size() > 3 && data[unit][1].size() < 4)
+        {
+            data[unit][1].push_back(name);
+            data[unit][1].push_back(phone);
+            data[unit][1].push_back(email);
+            data[unit][1].push_back(ic);
+        }
+    };
+    if (checkInfo(data, unit, "ic", ic))
+    {
+        cerr << "ERROR User has already been registered" << endl;
+    }
+    else
+    {
+        if (!is_unitFull(data, unit))
+        {
+
+            if (data.find(unit) == data.end())
+            {
+                data[unit] = {{}, {}};
+            }
+            storeData(data, unit, name, phone, email, ic);
+        }
+        else
+        {
+            cerr << "UNIT IS FULL" << endl;
+        }
+    }
+}
 
 void updateData(map<int, vector<vector<string>>> &data, int unit, string dataCode, string update)
 {
