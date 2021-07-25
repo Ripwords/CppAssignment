@@ -1,6 +1,6 @@
 #include "functions/dataProcessor.h"
 #include "prettyStrings/pretty.h"
-
+#include "functions/functions.h"
 using namespace std;
 
 int main()
@@ -30,7 +30,8 @@ int main()
         cout << "Enter your phone number: ";
         cin >> phoneNumber;
         isPhoneCorrect = checkInfo(data, unitNumber, "phone", phoneNumber);
-        // cout << isPhoneCorrect;
+        cout << isPhoneCorrect;
+        check_number(isPhoneCorrect);
         // cout << "\t" << title << endl;
         // searchData(data, unitNumber);
         // names = returnNames(data, unitNumber);
@@ -54,7 +55,7 @@ int main()
         break;
 
     default:
-        cerr << "Invalid Input LOL";
+        cerr << "Invalid Input.";
         break;
     }
 
