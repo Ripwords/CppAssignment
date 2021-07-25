@@ -15,13 +15,22 @@ int main()
     updateData(data, 12, "ic", newUpdate);
 
     // REGISTRATION FOR NEW USERS
-    registerNew(data, {
-                          "66",
-                          "TEST1",
-                          "TEST2",
-                          "TEST3",
-                          "TEST4",
-                      });
+    // registerNew(data, {
+    //                       "66",
+    //                       "TEST1",
+    //                       "TEST2",
+    //                       "TEST3",
+    //                       "TEST4",
+    //                   });
+
+    // REMOVE USER
+    // deleteFromDatabase(data, {
+    //                              "66",
+    //                              "TEST1",
+    //                              "TEST2",
+    //                              "TEST3",
+    //                              "TEST4",
+    //                          });
 
     // SIMPLE CHECK FOR UPDATE
     cout << data[12][0][dictionary["ic"]] << endl;

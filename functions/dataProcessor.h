@@ -2,12 +2,24 @@
 
 using namespace std;
 
+// DATA PROCESSING
+// MAPPING INFORMATION TYPE TO DATA CODE FOR EASIER RETRIEVAL OF DATA FROM VECTORS
 map<string, int> dictionary = {
     {"name", 0},
     {"phone", 1},
     {"email", 2},
     {"ic", 3}};
 
+// FUNCTION TO READ DATABASE GIVEN FILENAME AND OUTPUT A MAP DATA STRUCTURE
+// STRUCTURE IS IN THE FORM OF:
+// DATA = {
+//     {
+//         UNIT, {
+//             {NAME_1, PHONE_1, EMAIL_1, IC_1},
+//             {NAME_2, PHONE_2, EMAIL_2, IC_2}
+//         }
+//     }
+// }
 map<int, vector<vector<string>>> readFile(string filename)
 {
     ifstream FILE;
@@ -70,6 +82,8 @@ map<int, vector<vector<string>>> readFile(string filename)
     return data;
 }
 
+// DATA QUERY
+// FUNCTION TO PRINT OUT ALL THE INFORMATION OF A CERTAIN UNIT
 void searchData(map<int, vector<vector<string>>> data, int unit)
 {
     try
@@ -89,6 +103,7 @@ void searchData(map<int, vector<vector<string>>> data, int unit)
     }
 }
 
+// FUNCTION TO RETURN A VECTOR CONTAINING THE INFORMATION SPECIFIED WITH DATA CODE OF A CERTAIN UNIT
 vector<string> returnInfo(map<int, vector<vector<string>>> data, int unit, string dataCode)
 {
     vector<string> info;
@@ -96,16 +111,11 @@ vector<string> returnInfo(map<int, vector<vector<string>>> data, int unit, strin
     {
         for (int i = 0; i < 2; i++)
         {
-            if (data[unit][i].size() > 3)
+            if (data.at(unit)[i].size() > 3)
             {
                 info.push_back(data[unit][i][dictionary[dataCode]]);
             }
         }
-        // PRINTING OUT THE INFO
-        // for (int i = 0; i < info.size(); i++)
-        // {
-        //     cout << info[i] << endl;
-        // }
     }
     catch (const out_of_range)
     {
@@ -115,6 +125,7 @@ vector<string> returnInfo(map<int, vector<vector<string>>> data, int unit, strin
     return info;
 }
 
+// FUNCTION TO CHECK IF GIVEN INPUT ACCODING TO THE DATACODE IS INSIDE A CERTAIN UNIT NUMBER
 bool checkInfo(map<int, vector<vector<string>>> data, int unitNumber, string dataCode, string infoInput = "")
 {
     vector<string> info = returnInfo(data, unitNumber, dataCode);
@@ -130,6 +141,7 @@ bool checkInfo(map<int, vector<vector<string>>> data, int unitNumber, string dat
     return false;
 }
 
+// FUNCTION TO CHECK IF A UNIT IS FULLY REGISTERED OR NOT
 bool is_unitFull(map<int, vector<vector<string>>> data, int unit)
 {
     if (data.find(unit) == data.end())
@@ -153,6 +165,8 @@ bool is_unitFull(map<int, vector<vector<string>>> data, int unit)
     }
 }
 
+// DATA MODIFICATIONS
+// FUNCTION TO REGISTER NEW RESIDENTS
 void registerNew(map<int, vector<vector<string>>> &data, vector<string> registration)
 {
     int unit = stoi(registration[0]);
@@ -200,12 +214,15 @@ void registerNew(map<int, vector<vector<string>>> &data, vector<string> registra
     }
 }
 
+// FUNCTION TO UPDATE EXISTING USER INFORMATION
 void updateData(map<int, vector<vector<string>>> &data, int unit, string dataCode, string update)
 {
     data[unit][0][dictionary[dataCode]] = update;
 }
 
+// FUNCTION TO UPDATE THE DATABASE ( ONLY RUN THIS AT THE END OF MAINLOOP OR WHEN USERDATA IS MODIFIED FROM "updateData")
 void updateDatabase(map<int, vector<vector<string>>> &data, string filename)
+
 {
     ofstream FILE;
     FILE.open(filename, ios::out);
@@ -216,18 +233,15 @@ void updateDatabase(map<int, vector<vector<string>>> &data, string filename)
         {
             if (el.second[i].size() > 2)
             {
-                // cout << el.first << ",";
                 FILE << el.first << ",";
                 for (int j = 0; j < el.second[i].size(); j++)
                 {
                     if (j == el.second[i].size() - 1)
                     {
-                        // cout << el.second[i][j] << endl;
                         FILE << el.second[i][j] << endl;
                     }
                     else
                     {
-                        // cout << el.second[i][j] << ",";
                         FILE << el.second[i][j] << ",";
                     }
                 }
@@ -236,4 +250,25 @@ void updateDatabase(map<int, vector<vector<string>>> &data, string filename)
     }
 
     FILE.close();
+}
+
+void deleteFromDatabase(map<int, vector<vector<string>>> &data, vector<string> userInfo)
+{
+    int unit = stoi(userInfo[0]);
+    string name = userInfo[1];
+    string phone = userInfo[2];
+    string email = userInfo[3];
+    string ic = userInfo[4];
+
+    if (checkInfo(data, unit, "ic", ic))
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (ic == data[unit][i][4])
+            {
+                data[unit][i].clear();
+                cout << "removed user" << endl;
+            }
+        }
+    }
 }
