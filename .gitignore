@@ -33,6 +33,9 @@
 # PDF
 /pdf
 
+# DEV C++ 
+/devVersion
+
 # EXE
 *.exe
 
