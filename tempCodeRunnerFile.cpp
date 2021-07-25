@@ -12,14 +12,11 @@ int main()
     string phoneNumber;
     string managementPS;
     string managementID;
-    string managementIDStandard = "ID";
-    string managementPSStandard = "PS";
     bool isPhoneCorrect;
     bool isUnitCorrect;
     vector<string> names;
     string user_acc = "a";
     string manage_acc = "b";
-    bool x;
 
     cout << "Specify if u r the user or the management ( a / b ): " << endl;
     cin >> choice;
@@ -61,17 +58,12 @@ int main()
     case 'b':
         cout << "please enter the user ID: ";
         cin >> managementID;
-        managementCheckUp(managementID, managementIDStandard);
 
         cout << "Please enter the password: ";
         cin >> managementPS;
-        managementCheckUp(managementPS, managementPSStandard);
-        
-        managementOptions(); // To show the options for the management account.
-
         break;
 
-       
+        managementCheckUp(managementID, managementPS);
 
     default:
         cerr << "Invalid Input.";
