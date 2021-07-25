@@ -1,4 +1,4 @@
-#include "dataProcessorIncludes.h"
+#include "INCLUDES.h"
 
 using namespace std;
 
@@ -12,7 +12,8 @@ map<int, vector<vector<string>>> readFile(string filename)
 {
     ifstream FILE;
     FILE.open(filename);
-    if (!FILE) {
+    if (!FILE)
+    {
         cerr << "Error reading " << filename << endl;
     }
 
@@ -24,7 +25,7 @@ map<int, vector<vector<string>>> readFile(string filename)
 
     map<int, vector<vector<string>>> data;
 
-    auto storeData = [](auto &data, int unit, string name, string phone, string email, string ic)
+    auto storeData = [](map<int, vector<vector<string>>> &data, int unit, string name, string phone, string email, string ic)
     {
         if (data[unit][0].size() < 4)
         {
@@ -122,12 +123,47 @@ bool checkInfo(map<int, vector<vector<string>>> data, int unitNumber, string dat
     {
         if (find(info.begin(), info.end(), infoInput) != info.end())
         {
-            cout << "YAYYY";
             return true;
         }
-        cout << "NO";
         return false;
     }
-    cout << "NOOO";
     return false;
+}
+
+void updateData(map<int, vector<vector<string>>> &data, int unit, string dataCode, string update)
+{
+    data[unit][0][dictionary[dataCode]] = update;
+}
+
+void updateDatabase(map<int, vector<vector<string>>> &data, string filename)
+{
+    ofstream FILE;
+    FILE.open(filename, ios::out);
+
+    for (pair<int, vector<vector<string>>> el : data)
+    {
+        for (int i = 0; i < el.second.size(); i++)
+        {
+            if (el.second[i].size() > 2)
+            {
+                cout << el.first << ",";
+                FILE << el.first << ",";
+                for (int j = 0; j < el.second[i].size(); j++)
+                {
+                    if (j == el.second[i].size() - 1)
+                    {
+                        cout << el.second[i][j] << endl;
+                        FILE << el.second[i][j] << endl;
+                    }
+                    else
+                    {
+                        cout << el.second[i][j] << ",";
+                        FILE << el.second[i][j] << ",";
+                    }
+                }
+            }
+        }
+    }
+
+    FILE.close();
 }

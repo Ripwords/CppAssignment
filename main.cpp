@@ -30,6 +30,7 @@ int main()
         cout << "Enter your phone number: ";
         cin >> phoneNumber;
         isPhoneCorrect = checkInfo(data, unitNumber, "phone", phoneNumber);
+        // cout << isPhoneCorrect;
         // cout << "\t" << title << endl;
         // searchData(data, unitNumber);
         // names = returnNames(data, unitNumber);
@@ -62,4 +63,5 @@ int main()
 
     return 0;
 }
+
 

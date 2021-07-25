@@ -1,4 +1,4 @@
-#include "dataProcessorIncludes.h"
+#include "INCLUDES.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ map<int, vector<string>> readParcelData(string filename)
 
     map<int, vector<string>> data;
 
-    auto storeData = [](auto &data, int unit, string lockerID, string currentStatus)
+    auto storeData = [](map<int, vector<string>> &data, int unit, string lockerID, string currentStatus)
     {
         data[unit].push_back(lockerID);
         data[unit].push_back(currentStatus);
@@ -43,3 +43,4 @@ map<int, vector<string>> readParcelData(string filename)
 
     return data;
 }
+
