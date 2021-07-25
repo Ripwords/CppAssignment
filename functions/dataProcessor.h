@@ -130,6 +130,10 @@ bool checkInfo(map<int, vector<vector<string>>> data, int unitNumber, string dat
     return false;
 }
 
+// void registerNew(map<int, vector<vector<string>>> &data, vector<string> registration) {
+
+// }
+
 void updateData(map<int, vector<vector<string>>> &data, int unit, string dataCode, string update)
 {
     data[unit][0][dictionary[dataCode]] = update;
@@ -146,18 +150,18 @@ void updateDatabase(map<int, vector<vector<string>>> &data, string filename)
         {
             if (el.second[i].size() > 2)
             {
-                cout << el.first << ",";
+                // cout << el.first << ",";
                 FILE << el.first << ",";
                 for (int j = 0; j < el.second[i].size(); j++)
                 {
                     if (j == el.second[i].size() - 1)
                     {
-                        cout << el.second[i][j] << endl;
+                        // cout << el.second[i][j] << endl;
                         FILE << el.second[i][j] << endl;
                     }
                     else
                     {
-                        cout << el.second[i][j] << ",";
+                        // cout << el.second[i][j] << ",";
                         FILE << el.second[i][j] << ",";
                     }
                 }
