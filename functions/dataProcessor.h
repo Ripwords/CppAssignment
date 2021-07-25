@@ -55,7 +55,7 @@ map<int, vector<vector<string>>> readFile(string filename)
         }
         else
         {
-            cout << "ERROR unit registration is full" << endl;
+            cerr << "ERROR unit registration is full" << endl;
         }
     };
 
@@ -99,7 +99,7 @@ void searchData(map<int, vector<vector<string>>> data, int unit)
     }
     catch (const out_of_range)
     {
-        cout << "Unit has not registered" << endl;
+        cerr << "Unit has not registered" << endl;
     }
 }
 
@@ -119,7 +119,7 @@ vector<string> returnInfo(map<int, vector<vector<string>>> data, int unit, strin
     }
     catch (const out_of_range)
     {
-        cout << "Unit has not registered" << endl;
+        cerr << "Unit has not registered" << endl;
     }
 
     return info;
