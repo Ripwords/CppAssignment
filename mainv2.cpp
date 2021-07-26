@@ -20,11 +20,11 @@ int main()
     system("cls");
     draw_PARCEL_SYSTEM();
     // Specify if the user is a resident or a management based on his choice (choice) || The inputs are 'R' for users and 'M' for management.
-    if (choice == "R")
+    if (choice == "R" || choice == "r")
     {
         residentLogIn(data);
     }
-    else if (choice == "M")
+    else if (choice == "M" || choice == "m")
     {
         managementLogIn();
         managementOptions(data, parcelData);
