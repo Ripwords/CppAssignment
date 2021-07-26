@@ -16,8 +16,6 @@ void residentLogIn(map<int, vector<vector<string>>> data)
     cin >> unitNumber;
     cout << "\t\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     cout << "\t\n\n\tPlease enter the Phone Number >> ";
-    cin >> phoneNumber;
-    cout << "\t\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
 
     bool unitChecked = checkRegistration(data, unitNumber);
     if (!unitChecked)
@@ -29,14 +27,13 @@ void residentLogIn(map<int, vector<vector<string>>> data)
     else
     {
         // continues
-        cout << "\nphone number : ";
         cin >> phoneNumber;
+        cout << "\t\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
         bool phoneChecked = checkInfo(data, unitNumber, "phone", phoneNumber);
         if (!phoneChecked)
         {
             // returns error message that phone number is wrong
             cerr << /* Error Message*/ "Error" << endl;
-            exit(0);
         }
     }
 }
