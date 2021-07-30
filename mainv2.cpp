@@ -16,9 +16,10 @@ int main()
     cout << "\n\t Please press ENTER to continue >>";
     cin.get();
     system("cls");
+    draw_PARCEL_SYSTEM2();
     display_selection(choice);
     system("cls");
-    draw_PARCEL_SYSTEM();
+    
     // Specify if the user is a resident or a management based on his choice (choice) || The inputs are 'R' for users and 'M' for management.
     if (choice == "R" || choice == "r")
     {

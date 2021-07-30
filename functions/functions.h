@@ -10,30 +10,31 @@ void residentLogIn(map<int, vector<vector<string>>> data)
     draw_PARCEL_SYSTEM2();
     display_RESIDENT_LOGIN();
 
-    cout << "\t\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
-    cout << "\t\n\t                      			   		  	";
-    cout << "\t\n\tPlease enter the Unit Number  >> ";
+    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
+    cout << "\n\t\t\t\t\t                      			   		  	";
+    cout << "\n\t\t\t\t\tPlease enter the Unit Number  >> ";
     cin >> unitNumber;
-    cout << "\t\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    cout << "\t\n\n\tPlease enter the Phone Number >> ";
+    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    cout << "\n\t\t\t\t\tPlease enter the Phone Number >> ";
+    cin >> phoneNumber;
+    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
 
     bool unitChecked = checkRegistration(data, unitNumber);
     if (!unitChecked)
     {
         // returns error message that unit is not registered
-        cerr << /* Error Message*/ "Error" << endl;
+        display_error_msg();
         exit(0);
     }
     else
     {
         // continues
-        cin >> phoneNumber;
-        cout << "\t\n\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
+        
         bool phoneChecked = checkInfo(data, unitNumber, "phone", phoneNumber);
         if (!phoneChecked)
         {
             // returns error message that phone number is wrong
-            cerr << /* Error Message*/ "Error" << endl;
+            display_error_msg();
         }
     }
 }
@@ -48,14 +49,14 @@ void managementLogIn()
     draw_PARCEL_SYSTEM2();
     display_MANAGEMENT_LOGIN();
 
-    cout << "\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
-    cout << "\n\t\t\t\t                      			";
-    cout << "\n\t\t\t\t   Management ID  : ";
+    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
+    cout << "\n\t\t\t\t\t                      			";
+    cout << "\n\t\t\t\t\t   Management ID  : ";
     cin >> ManagementID;
-    cout << "\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    cout << "\n\t\t\t\t   Password       : ";
+    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    cout << "\n\t\t\t\t\t   Password       : ";
     cin >> ManagementPS;
-    cout << "\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
+    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
 
     system("cls");
 
@@ -66,6 +67,7 @@ void managementLogIn()
         if (!password)
         {
             // write anything here in case the program is working.
+            cerr << "INVALID Unit Number / Phone Number. Please try again =(" << endl;
         }
         else
         {
@@ -83,20 +85,45 @@ void managementLogIn()
 void searchForResident(map<int, vector<vector<string>>> data)
 {
     int unitNumber;
-    cout << "Unit Number: ";
+    draw_PARCEL_SYSTEM2();
+    cout << "\n\t\t\tPlease enter the Unit Number: ";
     cin >> unitNumber;
     searchData(data, unitNumber);
+    system("cls");
 }
 
 void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<string>> parcelData)
 {
     int option;
 
-    cout << "\nPlease select Choose an option :" << endl;
+    draw_PARCEL_SYSTEM2() ;
+    
     do
     {
-        cout << "1) Parcel info\n2) Search\n3) Register\n4) Update\n5) Exit\n(1 / 2 / 3 / 4 /5)" << endl;
+        cout << "\t\t\t\t\t  ______________"  << endl;
+        cout << "\t\t\t\t\t /              \\"<< endl;
+        cout << "\t\t\t\t\t< 1) Parcel info >"<< endl;
+        cout << "\t\t\t\t\t \\______________/"<< endl;
+        cout << "\t\t\t\t\t\t  ______________" << endl;
+        cout << "\t\t\t\t\t\t /              \\"<< endl;
+        cout << "\t\t\t\t\t\t<   2) Search    >"<< endl;
+        cout << "\t\t\t\t\t\t \\______________/"<< endl;
+        cout << "\t\t\t\t\t  ______________"  << endl;
+        cout << "\t\t\t\t\t /              \\"<< endl;
+        cout << "\t\t\t\t\t<   3) Register  >"<< endl;
+        cout << "\t\t\t\t\t \\______________/"<< endl;
+        cout << "\t\t\t\t\t\t  ______________" << endl;
+        cout << "\t\t\t\t\t\t /              \\"<< endl;
+        cout << "\t\t\t\t\t\t<    4) Update   >"<< endl;
+        cout << "\t\t\t\t\t\t \\______________/"<< endl;
+        cout << "\t\t\t\t\t  ______________"  << endl;
+        cout << "\t\t\t\t\t /              \\"<< endl;
+        cout << "\t\t\t\t\t<    5) Exit     >"<< endl;
+        cout << "\t\t\t\t\t \\______________/"<< endl;
+        cout << "___________________________________________________________________________________________________________________\n";
+        cout << "\nPlease select an option (1 / 2 / 3 / 4 /5) : " << endl;
         cin >> option;
+        
         if (cin.fail())
         {
             cin.clear();
