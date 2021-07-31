@@ -1,5 +1,6 @@
 #include <iostream>
 #include <windows.h>
+#include <iomanip>
 #include <string>
 
 using namespace std;
@@ -73,16 +74,82 @@ void display_MANAGEMENT_LOGIN(void)
     cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<<<      \n\n";
 }
 
-void display_error_msg()
+void display_error_msg(string info_a,string info_b,string &return_option)
 {
     cout <<"\n\n\t\t\t\t\t                 /||||/            \n";
     cout <<"\t\t\t\t\t                (o   o)            \n";
     cout <<"\t\t\t\t\t|~ ~ ~ ~ ooO ~ ~ (_) ~ ~ ~ ~ ~ ~ ~|\n";
     cout <<"\t\t\t\t\t| INVALID                         |\n";
-    cout <<"\t\t\t\t\t| Unit Number / Phone Number.     |\n";
+    cout <<"\t\t\t\t\t| " << left << setw(15) << info_a << left << setw(17) << info_b  << "|\n";
     cout <<"\t\t\t\t\t| Please try again =(             |\n";
     cout <<"\t\t\t\t\t|~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Ooo ~ ~|\n";
     cout <<"\t\t\t\t\t                |__|__|            \n";
     cout <<"\t\t\t\t\t                 || ||             \n";
     cout <<"\t\t\t\t\t                ooO Ooo            \n";
+    cout << "___________________________________________________________________________________________________________________\n";
+    cout << "\nEnter 0 (return home page) OR 1 (Try again) >> ";
+    cin >> return_option ;
+}
+
+void display_management_option (int &option)
+{
+    cout << "\t\t\t\t\t  ______________"  << endl;
+    cout << "\t\t\t\t\t /              \\"<< endl;
+    cout << "\t\t\t\t\t< 1) Parcel info >"<< endl;
+    cout << "\t\t\t\t\t \\______________/"<< endl;
+    cout << "\t\t\t\t\t\t  ______________" << endl;
+    cout << "\t\t\t\t\t\t /              \\"<< endl;
+    cout << "\t\t\t\t\t\t<   2) Search    >"<< endl;
+    cout << "\t\t\t\t\t\t \\______________/"<< endl;
+    cout << "\t\t\t\t\t  ______________"  << endl;
+    cout << "\t\t\t\t\t /              \\"<< endl;
+    cout << "\t\t\t\t\t<   3) Register  >"<< endl;
+    cout << "\t\t\t\t\t \\______________/"<< endl;
+    cout << "\t\t\t\t\t\t  ______________" << endl;
+    cout << "\t\t\t\t\t\t /              \\"<< endl;
+    cout << "\t\t\t\t\t\t<    4) Update   >"<< endl;
+    cout << "\t\t\t\t\t\t \\______________/"<< endl;
+    cout << "\t\t\t\t\t  ______________"  << endl;
+    cout << "\t\t\t\t\t /              \\"<< endl;
+    cout << "\t\t\t\t\t<    5) Exit     >"<< endl;
+    cout << "\t\t\t\t\t \\______________/"<< endl;
+    cout << "___________________________________________________________________________________________________________________\n";
+    cout << "\n\t\t\t > INVALID option =( < \n";
+    cout << "\nPlease enter a VALID option (1 / 2 / 3 / 4 / 5) ： " << endl;   
+    cin >> option ;
+}
+
+void display_parcel_info (map<int, vector<string>> data)
+{
+    string random_1 = "   =======";
+    string random_2 = "==================== ";
+    cout << "      ID          Status             ";
+    cout << "      ID          Status             ";
+    cout << "      ID          Status             " << endl;
+    for (int i=0; i < 10; i++) 
+    {
+        
+        for (int j=i+1; j < 21 + i + 1; j+=10)
+        {
+            cout << setw(5+3) << random_1 << setw(12+3) << random_2 << "      ";
+        }
+        cout << endl;
+        cout << "   >       |                 <      ";
+        cout << "    >       |                 <     ";
+        cout << "     >       |                 <\n";
+        for (int j=i+1; j < 21 + i + 1; j+=10)
+        {
+            cout << "   >" << right << setw(3) << j << "    |    ";
+            cout <<setw(12) << data[j][1] << " <       ";
+        }
+        cout << endl;
+        cout << "   >       |                 <      ";
+        cout << "    >       |                 <     ";
+        cout << "     >       |                 <\n";
+    }
+    cout << setw(5+3) << random_1 << setw(12+3) << random_2 << "      ";
+    cout << setw(5+3) << random_1 << setw(12+3) << random_2 << "      ";
+    cout << setw(5+3) << random_1 << setw(12+3) << random_2 << "      ";
+    cout << "\n___________________________________________________________________________________________________________________\n";
+    cout << "Please enter the occupied locker ID for detail information OR enter the empty locker ID to register the parcel >> ";
 }

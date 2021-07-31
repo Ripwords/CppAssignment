@@ -74,24 +74,10 @@ vector<int> showEmptyLocker(map<int, vector<string>> data)
     return emptyLocker;
 }
 
-void placeParcel(map<int, vector<string>> data)
-{
-}
+// void placeParcel(map<int, vector<string>> data)
+// {
+// }
 
-void retrieveParcel(map<int, vector<string>> data)
-{
-}
-
-void enterDetailsOfUser()
-{
-}
-
-void generatePasscode()
-{
-    string x;
-    srand(time(NULL));
-
-    x = rand() % 100000 + 999999;
-
-    cout << x;
-}
+// void retrieveParcel(map<int, vector<string>> data)
+// {
+// }

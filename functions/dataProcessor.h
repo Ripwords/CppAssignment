@@ -88,12 +88,6 @@ void searchData(map<int, vector<vector<string>>> data, int unit)
 {
     try
     {
-        /*
-        PYTHON
-        for i in range(len(data[unit])):
-            for j in range(len(data[unit][i])):
-                print(data[unit][i][j])
-        */
         for (int i = 0; i < data.at(unit).size(); i++)
         {
             for (int j = 0; j < data.at(unit)[i].size(); j++)
