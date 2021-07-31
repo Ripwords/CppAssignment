@@ -22,7 +22,6 @@ int main()
     
     // Specify if the user is a resident or a management based on his choice (choice) || The inputs are 'R' for users and 'M' for management.
     if (choice == "R" || choice == "r")
-    
     {
         residentLogIn(data);
         userOptions();

@@ -15,27 +15,40 @@ void residentLogIn(map<int, vector<vector<string>>> data)
     cout << "\n\t\t\t\t\tPlease enter the Unit Number  >> ";
     cin >> unitNumber;
     cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    cout << "\n\t\t\t\t\t                      			   		  	";
     cout << "\n\t\t\t\t\tPlease enter the Phone Number >> ";
     cin >> phoneNumber;
     cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	" << endl;
+    system("cls");
 
     bool unitChecked = checkRegistration(data, unitNumber);
-    if (!unitChecked)
-    {
-        // returns error message that unit is not registered
-        display_error_msg();
-        exit(0);
+    bool phoneChecked = checkInfo(data, unitNumber, "phone", phoneNumber);
+    string a = "Unit Number" ;
+    string b = "/ Phone Number" ;
+    string return_option ;
+    if (!unitChecked || !phoneChecked )
+    {   
+        // returns error message that unit is not registered        
+        while (return_option != "0" || return_option != "1") 
+        {
+            display_error_msg(a, b, return_option);
+            system ("cls") ;
+
+        //     if (return_option == "0")
+        //     {
+
+        //     }
+        //     else (return_option == "1")
+        //     {
+
+        //     }
+        }                 
     }
     else
     {
-        // continues
+        // continues to check phone number
         
-        bool phoneChecked = checkInfo(data, unitNumber, "phone", phoneNumber);
-        if (!phoneChecked)
-        {
-            // returns error message that phone number is wrong
-            display_error_msg();
-        }
+        
     }
 }
 
@@ -57,48 +70,55 @@ void managementLogIn()
     cout << "\n\t\t\t\t\t   Password       : ";
     cin >> ManagementPS;
     cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
-
     system("cls");
 
     bool password = ManagementPS.compare(managementPSStandard);
     bool ID = ManagementID.compare(managementIDStandard);
-    if (!ID)
+    string a = "Management ID" ;
+    string b = "/ Password" ;
+    string return_option ;
+    if (!ID || !password)
     {
-        if (!password)
-        {
-            // write anything here in case the program is working.
-            cerr << "INVALID Unit Number / Phone Number. Please try again =(" << endl;
-        }
-        else
-        {
-            cerr << /* Wrong Password*/ "Wrong Password";
-            exit(0);
-        }
+        while (return_option != "0" || return_option != "1")
+            {
+                display_error_msg(a, b, return_option);
+                system ("cls") ;
+                // if (return_option == "0")
+                // {
+                // }
+                // else (return_option == "1")
+                // {
+                // } 
+            }
     }
     else
     {
-        cerr << /* Wrong ID*/ "Wrong ID" << endl;
-        exit(0);
+    
     }
 }
 
 void searchForResident(map<int, vector<vector<string>>> data)
 {
     int unitNumber;
-    draw_PARCEL_SYSTEM2();
-    cout << "\n\t\t\tPlease enter the Unit Number: ";
-    cin >> unitNumber;
-    searchData(data, unitNumber);
-    system("cls");
+    draw_PARCEL_SYSTEM2(); 
+    cout << "\n\t\t\tPlease enter the Unit Number: "; 
+    cin >> unitNumber; 
+    searchData(data, unitNumber); 
+    system("cls"); 
 }
 
-int generateOTP(){
-    int i;
+string generateOTP()
+{
+    string OTP;
     srand (time(NULL));
 
-    i = (rand() % 100000 + 99999);
+    for (int i = 0; i < 6; i++) 
+    {
+        string num = to_string(rand() % 10);
+        OTP += num;
+    }
     
-    return i;
+    return OTP;
 
 }
 
@@ -111,29 +131,8 @@ void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<st
     
     do
     {
-        cout << "\t\t\t\t\t  ______________"  << endl;
-        cout << "\t\t\t\t\t /              \\"<< endl;
-        cout << "\t\t\t\t\t< 1) Parcel info >"<< endl;
-        cout << "\t\t\t\t\t \\______________/"<< endl;
-        cout << "\t\t\t\t\t\t  ______________" << endl;
-        cout << "\t\t\t\t\t\t /              \\"<< endl;
-        cout << "\t\t\t\t\t\t<   2) Search    >"<< endl;
-        cout << "\t\t\t\t\t\t \\______________/"<< endl;
-        cout << "\t\t\t\t\t  ______________"  << endl;
-        cout << "\t\t\t\t\t /              \\"<< endl;
-        cout << "\t\t\t\t\t<   3) Register  >"<< endl;
-        cout << "\t\t\t\t\t \\______________/"<< endl;
-        cout << "\t\t\t\t\t\t  ______________" << endl;
-        cout << "\t\t\t\t\t\t /              \\"<< endl;
-        cout << "\t\t\t\t\t\t<    4) Update   >"<< endl;
-        cout << "\t\t\t\t\t\t \\______________/"<< endl;
-        cout << "\t\t\t\t\t  ______________"  << endl;
-        cout << "\t\t\t\t\t /              \\"<< endl;
-        cout << "\t\t\t\t\t<    5) Exit     >"<< endl;
-        cout << "\t\t\t\t\t \\______________/"<< endl;
-        cout << "___________________________________________________________________________________________________________________\n";
-        cout << "\nPlease select an option (1 / 2 / 3 / 4 /5) : " << endl;
-        cin >> option;
+        display_management_option (option) ;
+        system("cls");
         
         if (cin.fail())
         {
@@ -141,9 +140,10 @@ void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<st
             cin.ignore(512, '\n');
             while (option < 1 || option > 5)
             {
-                cout << "Please enter a valid choice" << endl;
-                cout << "1) Parcel info\n2) Search\n3) Register\n4) Update\n5) Exit\n(1 / 2 / 3 / 4/ 5)" << endl;
-                cin >> option;
+                draw_PARCEL_SYSTEM2() ;
+                display_management_option (option) ;
+                
+
                 if (cin.fail())
                 {
                     cin.clear();
@@ -152,7 +152,7 @@ void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<st
                 }
             }
         }
-
+    
         switch (option)
         {
         case 1:
@@ -191,7 +191,8 @@ void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<st
 
 
 // Send sms after parcel arrived
-void sendSMS(int OTP){
+void sendSMS(string OTP)
+{
     cout << "Your parcel had arrived." << endl;
     cout << "=================================================" <<endl;
     cout << "|\tThe SMS has been sent to your phone.\t|" << endl;
@@ -203,7 +204,7 @@ void sendSMS(int OTP){
 }
 
 // Send email if the parcel is not collected for 3 days.
-void sendEmail(int OTP){
+void sendEmail(string OTP){
     cout << "You have not collected your parcel for 3 days." << endl;
     cout << "Please collect your parcel with the OTP : " << OTP << endl;
 }
@@ -217,8 +218,8 @@ void OneWeek(int periodOfStaying){
 void userOptions(){
     char choice;
     bool parcelRegistered = true; // To check if the parcel is registered in the data base.    
-    int periodOfStaying = 10; // to give how many days the parcel has been in the system. (current days - Parcel entered the system = periodofStaying)
-    int OTP = generateOTP();
+    int periodOfStaying = 3; // to give how many days the parcel has been in the system. (current days - Parcel entered the system = periodofStaying)
+    string OTP = generateOTP();
     
     
     cout << "Choose the option." << endl;
@@ -228,31 +229,33 @@ void userOptions(){
     if(choice == 'N' || choice == 'n'){
         cout << "U have chosen Notifications" << endl;
 
-        if(parcelRegistered){
-                    if(periodOfStaying > 3){
-                        if(periodOfStaying > 7){
-
-                            OneWeek(periodOfStaying);
-                        }
-                        else{
-
-                            sendEmail(OTP);
-                        }
-                    }
-                    
-                    else{
-                       sendSMS(OTP); 
-                       
-                    }
+        if(parcelRegistered)
+        {
+            if(periodOfStaying > 3)
+            {
+                if(periodOfStaying > 7)
+                {
+                    OneWeek(periodOfStaying);
+                }
+                else
+                {
+                    sendEmail(OTP);
+                }
+            }
+            else
+            {
+                sendSMS(OTP); 
+            }
         }
-        
-        else{
+        else
+        {
             cout << "==================================================" << endl;
             cout << "|\tThere is no parcel arrived. :(\t|" << endl;
             cout << "==================================================" << endl;
         }
     }
-    else if(choice == 'C' || choice == 'c'){
+    else if(choice == 'C' || choice == 'c')
+    {
         cout << "U have chosen to collect ur parcel";
     }
 }
