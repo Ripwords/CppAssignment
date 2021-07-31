@@ -17,7 +17,7 @@ void residentLogIn(map<int, vector<vector<string>>> data)
     cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     cout << "\n\t\t\t\t\tPlease enter the Phone Number >> ";
     cin >> phoneNumber;
-    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
+    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	" << endl;
 
     bool unitChecked = checkRegistration(data, unitNumber);
     if (!unitChecked)
@@ -92,9 +92,20 @@ void searchForResident(map<int, vector<vector<string>>> data)
     system("cls");
 }
 
+int generateOTP(){
+    int i;
+    srand (time(NULL));
+
+    i = (rand() % 100000 + 99999);
+    
+    return i;
+
+}
+
 void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<string>> parcelData)
 {
     int option;
+    
 
     draw_PARCEL_SYSTEM2() ;
     
@@ -149,6 +160,8 @@ void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<st
             cout << "Parcel Info" << endl;
             showEmptyLocker(parcelData);
             cout << endl;
+            
+            
 
             break;
 
@@ -174,4 +187,72 @@ void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<st
             cout << "EXITED" << endl;
         }
     } while (option != 5);
+}
+
+
+// Send sms after parcel arrived
+void sendSMS(int OTP){
+    cout << "Your parcel had arrived." << endl;
+    cout << "=================================================" <<endl;
+    cout << "|\tThe SMS has been sent to your phone.\t|" << endl;
+    cout << "=================================================" << endl;
+    cout << endl;
+    cout << "=================================" << endl;
+    cout << "|\tThe OTP is : " << OTP << " \t|" << endl;
+    cout << "=================================" << endl;
+}
+
+// Send email if the parcel is not collected for 3 days.
+void sendEmail(int OTP){
+    cout << "You have not collected your parcel for 3 days." << endl;
+    cout << "Please collect your parcel with the OTP : " << OTP << endl;
+}
+
+// Parcel is not collected for a week.
+void OneWeek(int periodOfStaying){
+    cout << "You have not colelcted your parcel for " << periodOfStaying << " days." << endl;
+    cout << "Please contact the management for further assist." << endl;
+}
+
+void userOptions(){
+    char choice;
+    bool parcelRegistered = true; // To check if the parcel is registered in the data base.    
+    int periodOfStaying = 10; // to give how many days the parcel has been in the system. (current days - Parcel entered the system = periodofStaying)
+    int OTP = generateOTP();
+    
+    
+    cout << "Choose the option." << endl;
+    cout << "Notifications, Collect a Parcel (N / C) :";
+    cin >> choice;
+
+    if(choice == 'N' || choice == 'n'){
+        cout << "U have chosen Notifications" << endl;
+
+        if(parcelRegistered){
+                    if(periodOfStaying > 3){
+                        if(periodOfStaying > 7){
+
+                            OneWeek(periodOfStaying);
+                        }
+                        else{
+
+                            sendEmail(OTP);
+                        }
+                    }
+                    
+                    else{
+                       sendSMS(OTP); 
+                       
+                    }
+        }
+        
+        else{
+            cout << "==================================================" << endl;
+            cout << "|\tThere is no parcel arrived. :(\t|" << endl;
+            cout << "==================================================" << endl;
+        }
+    }
+    else if(choice == 'C' || choice == 'c'){
+        cout << "U have chosen to collect ur parcel";
+    }
 }
