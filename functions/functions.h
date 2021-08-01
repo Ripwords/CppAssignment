@@ -189,7 +189,7 @@ void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<st
     } while (option != 5);
 }
 
-
+//  TODO : Needs to be refactored
 // Send sms after parcel arrived
 void sendSMS(string OTP)
 {
