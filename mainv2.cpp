@@ -24,12 +24,12 @@ int main()
     if (choice == "R" || choice == "r")
     {
         residentLogIn(data);
-        userOptions();
+        // userMenu();
     }
     else if (choice == "M" || choice == "m")
     {
-        managementLogIn();
-        managementOptions(data, parcelData);
+        managementLogIn(data, parcelData);
+        managementMenu(data, parcelData);
     }
     else
     {

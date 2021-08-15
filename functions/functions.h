@@ -3,101 +3,104 @@
 #include "../prettyStrings/pretty.h"
 #include <cctype>
 
-void residentLogIn(map<int, vector<vector<string>>> data)
+void residentLogIn(map<int, vector<vector<string>>> &data)
 {
+    // declaring variables
     int unitNumber;
     string phoneNumber;
+    string return_option;
+
+    // printing out user interface
     draw_PARCEL_SYSTEM2();
     display_RESIDENT_LOGIN();
 
-    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
-    cout << "\n\t\t\t\t\t                      			   		  	";
-    cout << "\n\t\t\t\t\tPlease enter the Unit Number  >> ";
-    cin >> unitNumber;
-    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    cout << "\n\t\t\t\t\t                      			   		  	";
-    cout << "\n\t\t\t\t\tPlease enter the Phone Number >> ";
-    cin >> phoneNumber;
-    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	" << endl;
-    system("cls");
-
-    bool unitChecked = checkRegistration(data, unitNumber);
-    bool phoneChecked = checkInfo(data, unitNumber, "phone", phoneNumber);
-    string a = "Unit Number" ;
-    string b = "/ Phone Number" ;
-    string return_option ;
-    if (!unitChecked || !phoneChecked )
-    {   
-        // returns error message that unit is not registered        
-        while (return_option != "0" || return_option != "1") 
-        {
-            display_error_msg(a, b, return_option);
-            system ("cls") ;
-
-        //     if (return_option == "0")
-        //     {
-
-        //     }
-        //     else (return_option == "1")
-        //     {
-
-        //     }
-        }                 
-    }
-    else
+    while (true)
     {
-        // continues to check phone number
-        
-        
+        // user entering their unit number and phone number
+        user_unit_phone_enter(unitNumber, phoneNumber);
+
+        // Functions to check for unit and phone registration
+        bool unitChecked = checkRegistration(data, unitNumber);
+        bool phoneChecked = checkInfo(data, unitNumber, "phone", phoneNumber);
+
+        if (!unitChecked || !phoneChecked)
+        {
+            // returns error message that unit is not registered
+            while (return_option != "0" || return_option != "1")
+            {
+                display_error_msg("Unit Number", "/ Phone Number", return_option);
+                system("cls");
+
+                if (return_option == "0")
+                {
+                    return;
+                }
+                else if (return_option == "1")
+                {
+                    break;
+                }
+                continue;
+            }
+        }
+        else if (unitChecked && phoneChecked)
+        {
+            // Checks if phone number is in the parcel database
+
+            // userMenu();
+        }
+        break;
     }
 }
 
-void managementLogIn()
+void managementLogIn(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
 {
+    // Declaring variables
     string ManagementID;
     string ManagementPS;
+    string return_option;
     string managementIDStandard = "ID";
     string managementPSStandard = "PS";
 
+    // printing out user interface
     draw_PARCEL_SYSTEM2();
     display_MANAGEMENT_LOGIN();
 
-    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
-    cout << "\n\t\t\t\t\t                      			";
-    cout << "\n\t\t\t\t\t   Management ID  : ";
-    cin >> ManagementID;
-    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    cout << "\n\t\t\t\t\t   Password       : ";
-    cin >> ManagementPS;
-    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	";
-    system("cls");
+    while (true)
+    {
+        // management entering their details
+        mang_ID_PS_enter(ManagementID, ManagementPS);
 
-    bool password = ManagementPS.compare(managementPSStandard);
-    bool ID = ManagementID.compare(managementIDStandard);
-    string a = "Management ID" ;
-    string b = "/ Password" ;
-    string return_option ;
-    if (!ID || !password)
-    {
-        while (return_option != "0" || return_option != "1")
+        // Functions to check for Management ID and password
+        bool password = ManagementPS.compare(managementPSStandard);
+        bool ID = ManagementID.compare(managementIDStandard);
+
+        if (!ID || !password)
+        {
+            // returns error messages if management entered the wrong credentials
+            while (return_option != "0" || return_option != "1")
             {
-                display_error_msg(a, b, return_option);
-                system ("cls") ;
-                // if (return_option == "0")
-                // {
-                // }
-                // else (return_option == "1")
-                // {
-                // } 
+                display_error_msg("Management ID", "/ Password", return_option);
+                system("cls");
+
+                if (return_option == "0")
+                {
+                    return;
+                }
+                else if (return_option == "1")
+                {
+                    break;
+                }
+                continue;
             }
-    }
-    else
-    {
-    
+        }
+        else if (password && ID)
+        {
+            managementMenu(data, parcelData);
+        }
     }
 }
 
-void searchForResident(map<int, vector<vector<string>>> data)
+void searchForResident(map<int, vector<vector<string>>> &data)
 {
     int unitNumber;
     draw_PARCEL_SYSTEM2(); 
@@ -107,155 +110,264 @@ void searchForResident(map<int, vector<vector<string>>> data)
     system("cls"); 
 }
 
-string generateOTP()
+void userRegistration(map<int, vector<vector<string>>> &data)
 {
-    string OTP;
-    srand (time(NULL));
-
-    for (int i = 0; i < 6; i++) 
+    string unit;
+    string name;
+    string phone;
+    string email;
+    string ic;
+    while (true)
     {
-        string num = to_string(rand() % 10);
-        OTP += num;
-    }
-    
-    return OTP;
-
-}
-
-void managementOptions(map<int, vector<vector<string>>> data, map<int, vector<string>> parcelData)
-{
-    int option;
-    
-
-    draw_PARCEL_SYSTEM2() ;
-    
-    do
-    {
-        display_management_option (option) ;
+        cout << "\n\t\t\t\t\t      >>>>>>>>>>>>>>>>>>>>>>>>\n";
+        cout << "\t\t\t\t\t      |                |      \n";
+        cout << "\t\t\t\t\t      |  Registration  |      \n";
+        cout << "\t\t\t\t\t      |                |      \n";
+        cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<      \n\n";
+        cout << "\n\t\t\t\t\t                      			";
+        cout << "\n\t\t\t\t\t   Unit Number     : ";
+        cin >> unit;
+        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t\t\t   Full Name       : ";
+        cin >> name;
+        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t\t\t   Phone Number    : ";
+        cin >> phone;
+        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t\t\t   Email Adress    : ";
+        cin >> email;
+        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t\t\t   IC Number       : ";
+        cin >> ic;
         system("cls");
-        
-        if (cin.fail())
+        cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+        cout << "\n\t\t\t\t\t| Unit Number  | " << setw(25) << unit << "| ";
+        cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+        cout << "\n\t\t\t\t\t| Full Name    | " << setw(25) << name << "| ";
+        cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+        cout << "\n\t\t\t\t\t| Phone Number | " << setw(25) << phone << "|";
+        cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+        cout << "\n\t\t\t\t\t| Email Adress | " << setw(25) << email << "|";
+        cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+        cout << "\n\t\t\t\t\t| IC Number    | " << setw(25) << ic << "|   ";
+        cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+        cout << "___________________________________________________________________________________________________________________\n";
+        string YorN;
+        cout << "Please confirm the entered information YES (Y) or NO (N) >> ";
+        cin >> YorN;
+        if (YorN == "y" || YorN == "Y")
         {
-            cin.clear();
-            cin.ignore(512, '\n');
-            while (option < 1 || option > 5)
-            {
-                draw_PARCEL_SYSTEM2() ;
-                display_management_option (option) ;
-                
-
-                if (cin.fail())
-                {
-                    cin.clear();
-                    cin.ignore(512, '\n');
-                    continue;
-                }
-            }
+            break;
         }
-    
-        switch (option)
+        else if (YorN == "n" || YorN == "N")
         {
-        case 1:
-            system("cls");
-            cout << "Parcel Info" << endl;
-            showEmptyLocker(parcelData);
-            cout << endl;
-            
-            
-
-            break;
-
-        case 2:
-            system("cls");
-            cout << "Search For Residents";
-            searchForResident(data);
-
-            break;
-
-        case 3:
-            system("cls");
-            cout << "Register New Resident";
-            break;
-
-        case 4:
-            system("cls");
-            cout << "Update an Existing Resident";
-            break;
-
-        case 5:
-            system("cls");
-            cout << "EXITED" << endl;
+            continue;
         }
-    } while (option != 5);
+    }
+
+    vector<string> registration = {unit, name, phone, email, ic};
+    registerNew(data, registration);
 }
 
-//  TODO : Needs to be refactored
-// Send sms after parcel arrived
-void sendSMS(string OTP)
+void updateUserData(map<int, vector<vector<string>>> &data)
 {
-    cout << "Your parcel had arrived." << endl;
-    cout << "=================================================" <<endl;
-    cout << "|\tThe SMS has been sent to your phone.\t|" << endl;
-    cout << "=================================================" << endl;
-    cout << endl;
-    cout << "=================================" << endl;
-    cout << "|\tThe OTP is : " << OTP << " \t|" << endl;
-    cout << "=================================" << endl;
-}
+    string unit;
+    string dataCode;
+    string update;
+    string currentInfo;
+    string option;
 
-// Send email if the parcel is not collected for 3 days.
-void sendEmail(string OTP){
-    cout << "You have not collected your parcel for 3 days." << endl;
-    cout << "Please collect your parcel with the OTP : " << OTP << endl;
-}
-
-// Parcel is not collected for a week.
-void OneWeek(int periodOfStaying){
-    cout << "You have not colelcted your parcel for " << periodOfStaying << " days." << endl;
-    cout << "Please contact the management for further assist." << endl;
-}
-
-void userOptions(){
-    char choice;
-    bool parcelRegistered = true; // To check if the parcel is registered in the data base.    
-    int periodOfStaying = 3; // to give how many days the parcel has been in the system. (current days - Parcel entered the system = periodofStaying)
-    string OTP = generateOTP();
-    
-    
-    cout << "Choose the option." << endl;
-    cout << "Notifications, Collect a Parcel (N / C) :";
-    cin >> choice;
-
-    if(choice == 'N' || choice == 'n'){
-        cout << "U have chosen Notifications" << endl;
-
-        if(parcelRegistered)
+    while (true)
+    {
+        display_USER_UPDATE();
+        cout << "\n\t\t\t\t\t                      			";
+        cout << "\n\t\t\t\t\t  Please key in the Unit Number   : ";
+        cin >> unit;
+        updateUserDataPrintOut();
+        cin >> option;
+        system("cls");
+        draw_PARCEL_SYSTEM2();
+        display_USER_UPDATE();
+        if (option == "1")
         {
-            if(periodOfStaying > 3)
+            cout << "\n\n\t\t\t\t\tPlease enter the old phone number       : ";
+            cin >> currentInfo;
+
+            if (checkInfo(data, stoi(unit), "phone", currentInfo))
             {
-                if(periodOfStaying > 7)
-                {
-                    OneWeek(periodOfStaying);
-                }
-                else
-                {
-                    sendEmail(OTP);
-                }
+                cout << "\n\n\t\t\t\t\tPlease enter the new phone number :";
+                cin >> update;
             }
             else
             {
-                sendSMS(OTP); 
+                display_invalid_input();
+                string errorOption;
+                cout << "\nEnter 0 (return home page) OR 1 (Try again) >> ";
+                cin >> errorOption;
             }
         }
-        else
+        else if (option == "2")
         {
-            cout << "==================================================" << endl;
-            cout << "|\tThere is no parcel arrived. :(\t|" << endl;
-            cout << "==================================================" << endl;
+            cout << "\n\n\t\t\t\t\tPlease enter the old Email       : ";
+            cin >> currentInfo;
+
+            if (checkInfo(data, stoi(unit), "email", currentInfo))
+            {
+                cout << "\n\n\t\t\t\t\tPlease enter the new Email :";
+                cin >> update;
+            }
+            else
+            {
+                display_invalid_input();
+                string errorOption;
+                cout << "\nEnter 0 (return home page) OR 1 (Try again) >> ";
+                cin >> errorOption;
+                while (errorOption != "0" || errorOption != "1")
+                {
+                    if (errorOption == "0")
+                    {
+                        return;
+                    }
+                    else if (errorOption == "1")
+                    {
+                        break;
+                    }
+                }
+                continue;
+            }
         }
     }
-    else if(choice == 'C' || choice == 'c')
+
+    updateData(data, stoi(unit), dataCode, update, currentInfo);
+}
+
+// Pending creating user interface
+void deleteUser(map<int, vector<vector<string>>> &data)
+{
+    string unit;
+    string ic;
+
+    cin >> unit;
+    cin >> ic;
+    deleteFromDatabase(data, stoi(unit), ic);
+}
+
+// Pending creating user interface
+// ! NOT DONE
+void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
+{
+    int lockerID; // determine automatically
+}
+
+// Pending creating user interface
+void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
+{
+    // declaring variables
+    string option;
+
+    // printing out the user interface
+    draw_PARCEL_SYSTEM2();
+
+    while (true)
     {
-        cout << "U have chosen to collect ur parcel";
+        display_management_option(option);
+        system("cls");
+
+        if (option != "1" || option != "2" || option != "3" || option != "4" || option != "5")
+        {
+            cout << "Please enter a valid selection" << endl;
+            continue;
+        }
+        system("cls");
+
+        if (option == "1")
+        {
+            //TODO write function to place pacel and send sms
+            cout << "Parcel Info" << endl;
+            showEmptyLocker(parcelData);
+            system("cls");
+            continue;
+        }
+        else if (option == "2")
+        {
+            cout << "Seach for Residents" << endl;
+            searchForResident(data);
+            system("cls");
+            continue;
+        }
+        else if (option == "3")
+        {
+            cout << "Register New Resident" << endl;
+            userRegistration(data);
+            system("cls");
+            continue;
+        }
+        else if (option == "4")
+        {
+            cout << "Update exisiting resident information" << endl;
+            string choice;
+            cin >> choice;
+            if (choice == "Change Data")
+            {
+                updateUserData(data);
+            }
+            else if (choice == "Delete Data")
+            {
+                deleteUser(data);
+            }
+            system("cls");
+            continue;
+        }
+        else if (option == "5")
+        {
+            break;
+        }
+        break;
     }
+}
+
+// Pending creating user interface
+void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
+{
+    // Retrieve parcel, update user information
+    // TODO to be built
+    while (true)
+    {
+        string option;
+        display_user_option(option);
+        system("cls");
+        if (option != "1" || option != "2")
+        {
+            cout << "Please enter a valid selection" << endl;
+            continue;
+        }
+        system("cls");
+        if (option == "1")
+        {
+            cout << "Parcel Retrieval" << endl;
+
+            continue;
+        }
+        else if (option == "2")
+        {
+            cout << "Update Information" << endl;
+
+            continue;
+        }
+    }
+}
+
+void updateUserDataPrintOut()
+{
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
+    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
+    cout << "\t\t\t*Phone Number(1)*\t\t|\t\t*   Email(2)  *  \n";
+    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
+    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "___________________________________________________________________________________________________________________\n";
+    cout << "\t\t\n\tPlease select the option ( 1 / 2 ) to continue >> ";
 }

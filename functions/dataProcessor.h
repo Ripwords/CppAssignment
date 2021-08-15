@@ -1,7 +1,5 @@
 #include "INCLUDES.h"
 
-
-
 // DATA PROCESSING
 // MAPPING INFORMATION TYPE TO DATA CODE FOR EASIER RETRIEVAL OF DATA FROM VECTORS
 map<string, int> dictionary = {
@@ -194,7 +192,8 @@ void registerNew(map<int, vector<vector<string>>> &data, vector<string> registra
     };
     if (checkInfo(data, unit, "ic", ic))
     {
-        cerr << "ERROR User has already been registered" << endl;
+        cerr << "ERROR User has already been registered, press enter to continue" << endl;
+        cin.get();
     }
     else
     {
@@ -215,7 +214,7 @@ void registerNew(map<int, vector<vector<string>>> &data, vector<string> registra
 }
 
 // FUNCTION TO UPDATE EXISTING USER INFORMATION
-void updateData(map<int, vector<vector<string>>> &data, int unit, string dataCode, string update)
+void updateData(map<int, vector<vector<string>>> &data, int unit, string dataCode, string update, string currentInfo)
 {
     if (data.find(unit) == data.end())
     {
@@ -223,7 +222,17 @@ void updateData(map<int, vector<vector<string>>> &data, int unit, string dataCod
     }
     else
     {
-        data[unit][0][dictionary[dataCode]] = update;
+        if (checkInfo(data, unit, dataCode, currentInfo))
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                if (currentInfo == data.at(unit)[i][dictionary[dataCode]])
+                {
+                    data[unit][i][dictionary[dataCode]] = update;
+                    break;
+                }
+            }
+        }
     }
 }
 
