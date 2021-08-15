@@ -356,18 +356,3 @@ void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &
         }
     }
 }
-
-void updateUserDataPrintOut()
-{
-    cout << "\t\t\t                 \t\t|                     \n";
-    cout << "\t\t\t                 \t\t|                     \n";
-    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
-    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
-    cout << "\t\t\t*Phone Number(1)*\t\t|\t\t*   Email(2)  *  \n";
-    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
-    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
-    cout << "\t\t\t                 \t\t|                     \n";
-    cout << "\t\t\t                 \t\t|                     \n";
-    cout << "___________________________________________________________________________________________________________________\n";
-    cout << "\t\t\n\tPlease select the option ( 1 / 2 ) to continue >> ";
-}

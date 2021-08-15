@@ -295,3 +295,18 @@ void popUpMsg(string OTP)
 
     MessageBoxA(NULL, msg.c_str(), "SMS SENT!", MB_ICONINFORMATION | MB_OK);
 }
+
+void updateUserDataPrintOut()
+{
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
+    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
+    cout << "\t\t\t*Phone Number(1)*\t\t|\t\t*   Email(2)  *  \n";
+    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
+    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "___________________________________________________________________________________________________________________\n";
+    cout << "\t\t\n\tPlease select the option ( 1 / 2 ) to continue >> ";
+}
