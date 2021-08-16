@@ -15,7 +15,9 @@ void searchForResident(map<int, vector<vector<string>>> &data)
         {
             cin.clear();
             cin.ignore(512, '\n');
-            cout << "Invalid Unit Number, (Y) to try again, (N) to leave" << endl;
+            display_invalid_input();
+            system("cls");
+            cout << "\nInvalid Unit Number, (Y) to try again, (N) to leave" << endl;
             string YorN;
             cin >> YorN;
             if (YorN == "y" || YorN == "Y")
@@ -29,7 +31,7 @@ void searchForResident(map<int, vector<vector<string>>> &data)
             }
             else
             {
-                cout << "Invalid input, the program will now leave this menu" << endl;
+                cout << "\nInvalid input, the program will now leave this menu" << endl;
                 return;
             }
         }
@@ -309,9 +311,9 @@ void deleteUser(map<int, vector<vector<string>>> &data)
 
 // Pending creating user interface
 // ! NOT DONE
-void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
+void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData, string phone)
 {
-    int lockerID; // determine automatically
+    int lockerID = phoneCheck(parcelData, phone);
 }
 
 void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
