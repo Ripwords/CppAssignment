@@ -17,8 +17,7 @@ void searchForResident(map<int, vector<vector<string>>> &data)
         {
             cin.clear();
             cin.ignore(512, '\n');
-            void display_error_msg("Unit Number", " ", return_option) ;
-            cin >> return_option;
+            display_error_msg("Unit Number", " ", return_option);
             if (return_option == "1")
             {
                 system("cls");
@@ -31,7 +30,7 @@ void searchForResident(map<int, vector<vector<string>>> &data)
             }
             else
             {
-                cout << "\nInvalid input, the program will now leave this menu" << endl;
+                display_invalid_input();
                 return;
             }
         }
@@ -40,7 +39,7 @@ void searchForResident(map<int, vector<vector<string>>> &data)
     searchData(data, unitNumber);
     cin.clear();
     cin.ignore(512, '\n');
-    cout << "Press enter to continue";
+    cout << "\nPress enter to continue >> ";
     cin.get();
 
     system("cls");
@@ -53,6 +52,7 @@ void userRegistration(map<int, vector<vector<string>>> &data)
     string phone;
     string email;
     string ic;
+    string return_option;
     while (true)
     {
         display_title("Registration");
@@ -62,16 +62,32 @@ void userRegistration(map<int, vector<vector<string>>> &data)
         {
             cin.clear();
             cin.ignore(512, '\n');
-            display_invalid_input();
+            display_error_msg("Unit Number", " ", return_option);
+            if (return_option == "1")
+            {
+                system("cls");
+                display_title("Registration");
+                cout << "\n\t\t\t\t\t   Unit Number     : ";
+                cin >> unit;
+            }
+            else if (return_option == "0")
+            {
+                system("cls");
+                return;
+            }
+            else
+            {
+                display_invalid_input();
+                return;
+            }
             system("cls");
-            display_title("Registration");
-            cout << "\n\t\t\t\t\t   Unit Number     : ";
-            cin >> unit;
         }
 
         cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         cout << "\n\n\t\t\t\t\t   Full Name       : ";
-        cin >> name;
+        cin.clear();
+        cin.ignore(512, '\n');
+        getline(cin, name);
         cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         cout << "\n\n\t\t\t\t\t   Phone Number    : ";
         cin >> phone;
@@ -83,15 +99,15 @@ void userRegistration(map<int, vector<vector<string>>> &data)
         cin >> ic;
         system("cls");
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| Unit Number  | " << setw(25) << unit << "| ";
+        cout << "\n\t\t\t\t\t| Unit Number  |  " << setw(23) << left << unit << "| ";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| Full Name    | " << setw(25) << name << "| ";
+        cout << "\n\t\t\t\t\t| Full Name    |  " << setw(23) << left << name << "| ";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| Phone Number | " << setw(25) << phone << "|";
+        cout << "\n\t\t\t\t\t| Phone Number |  " << setw(23) << left << phone << "|";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| Email Adress | " << setw(25) << email << "|";
+        cout << "\n\t\t\t\t\t| Email Adress |  " << setw(23) << left << email << "|";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| IC Number    | " << setw(25) << ic << "|   ";
+        cout << "\n\t\t\t\t\t| IC Number    |  " << setw(23) << left << ic << "|   ";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
         cout << "\n___________________________________________________________________________________________________________________\n";
         string YorN;
@@ -103,7 +119,7 @@ void userRegistration(map<int, vector<vector<string>>> &data)
         }
         else if (YorN == "n" || YorN == "N")
         {
-            cout << "Do you want to re-input your information? Y or N" << endl;
+            cout << "Do you want to modify your information? Y or N >> " << endl;
             string YorN_2;
             cin >> YorN_2;
             if (YorN_2 == "Y" || YorN_2 == "y")
@@ -118,7 +134,7 @@ void userRegistration(map<int, vector<vector<string>>> &data)
         }
         else
         {
-            cout << "Invalid input, the program will now leave this menu" << endl;
+            display_invalid_input();
             return;
         }
     }
@@ -126,6 +142,7 @@ void userRegistration(map<int, vector<vector<string>>> &data)
     registerNew(data, registration);
 }
 
+// FOR MANAGEMENT ONLY
 void updateUserData(map<int, vector<vector<string>>> &data)
 {
     int unit;
@@ -133,6 +150,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
     string update;
     string currentInfo;
     string option;
+    string return_option;
 
     while (true)
     {
@@ -142,36 +160,35 @@ void updateUserData(map<int, vector<vector<string>>> &data)
             cout << "\n\t\t\t\t\t                      			";
             cout << "\n\t\t\t\t\t  Please key in the Unit Number   : ";
             cin >> unit;
+
             if (cin.fail())
             {
                 cin.clear();
                 cin.ignore(512, '\n');
-                display_invalid_input();
                 system("cls");
-                string YorN;
-                cout << "Do you want to continue? Yes (Y) or NO (N) : " << endl;
-                cin >> YorN;
-                if (YorN == "Y" || YorN == "y")
+                display_error_msg("Unit Number", " ", return_option);
+                if (return_option == "1")
                 {
                     system("cls");
                     continue;
                 }
-                else if (YorN == "N" || YorN == "n")
+                else if (return_option == "0")
                 {
+                    system("cls");
                     return;
                 }
                 else
                 {
-                    cout << "Invalid input, the program will now leave this menu" << endl;
+                    display_invalid_input();
+                    system("cls");
                     return;
                 }
-                continue;
             }
             else
             {
                 if (!checkRegistration(data, unit))
                 {
-                    cout << "\nUnit is not registered in the database, please refer to management\nPress enter to continue" << endl;
+                    cout << "\nUnit is not registered in the database, please refer to management\n\n\t\tPress enter to continue >>" << endl;
                     cin.clear();
                     cin.ignore(512, '\n');
                     cin.get();
@@ -190,23 +207,21 @@ void updateUserData(map<int, vector<vector<string>>> &data)
             {
                 cin.clear();
                 cin.ignore(512, '\n');
-                display_invalid_input();
-                system("cls");
-                string YorN;
-                cout << "Do you want to continue? Yes (Y) or NO (N) : " << endl;
-                cin >> YorN;
-                if (YorN == "Y" || YorN == "y")
+                display_error_msg("OPTION", " ", return_option);
+                if (return_option == "1")
                 {
                     system("cls");
                     continue;
                 }
-                else if (YorN == "N" || YorN == "n")
+                else if (return_option == "0")
                 {
+                    system("cls");
                     return;
                 }
                 else
                 {
-                    cout << "Invalid input, the program will now leave this menu" << endl;
+                    display_invalid_input();
+                    system("cls");
                     return;
                 }
                 continue;
@@ -229,22 +244,19 @@ void updateUserData(map<int, vector<vector<string>>> &data)
                 }
                 else
                 {
-                    cout << "The phone number is incorrect" << endl;
-                    string errorOption;
-                    cout << "\nEnter 0 (return home page) OR 1 (Try again) >> ";
-                    cin >> errorOption;
-                    if (errorOption == "0")
+                    display_error_msg("Phone Number", " ",return_option) ;
+                    if (return_option == "0")
                     {
                         return;
                     }
-                    else if (errorOption == "1")
+                    else if (return_option == "1")
                     {
                         system("cls");
                         continue;
                     }
                     else
                     {
-                        cout << "Invalid input, the program will now leave this menu" << endl;
+                        display_invalid_input();
                         return;
                     }
                 }

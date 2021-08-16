@@ -106,7 +106,7 @@ void display_invalid_input(void)
     cout << "\n\t\t\t  /                            \\  ";
     cout << "\n\t\t\t /        Invalid input.        \\ ";
     cout << "\n\t\t\t|                                | ";
-    cout << "\n\t\t\t \\  Press ENTER to try again.   / ";
+    cout << "\n\t\t\t \\  Press ENTER to continue.    / ";
     cout << "\n\t\t\t  \\____________________________/  ";
     cout << "\n\t\t\t     \\       /                    ";
     cout << "\n\t\t\t      \\     /                     ";
@@ -116,6 +116,8 @@ void display_invalid_input(void)
     cout << "\n\t\t\t       ./)_)                       ";
     cout << "\n\t\t\t         \" \"                      ";
     cout << "\n___________________________________________________________________________________________________________________\n";
+    cin.clear();
+    cin.ignore(512, '\n');
     cin.get();
 }
 
