@@ -123,7 +123,7 @@ void display_invalid_input(void)
     cout << "\n\t\t\t  /                            \\  ";
     cout << "\n\t\t\t /        Invalid input.        \\ ";
     cout << "\n\t\t\t|                                | ";
-    cout << "\n\t\t\t \\       Please try agian.      / ";
+    cout << "\n\t\t\t \\  Please enter to try agian.  / ";
     cout << "\n\t\t\t  \\____________________________/  ";
     cout << "\n\t\t\t     \\       /                    ";
     cout << "\n\t\t\t      \\     /                     ";
@@ -131,9 +131,9 @@ void display_invalid_input(void)
     cout << "\n\t\t\t        \\ /                       ";
     cout << "\n\t\t\t       {O,O}                       ";
     cout << "\n\t\t\t       ./)_)                       ";
-    cout << "\n\t\t\t         " "                       ";
-    cout << "___________________________________________________________________________________________________________________\n";
-    
+    cout << "\n\t\t\t         \" \"                      ";
+    cout << "\n___________________________________________________________________________________________________________________\n";
+    cin.get();
 }
 
 void user_unit_phone_enter(int &unitNumber, string &phoneNumber) //! To be renamed by Bryan
@@ -309,4 +309,14 @@ void updateUserDataPrintOut()
     cout << "\t\t\t                 \t\t|                     \n";
     cout << "___________________________________________________________________________________________________________________\n";
     cout << "\t\t\n\tPlease select the option ( 1 / 2 ) to continue >> ";
+}
+
+void display_registration()
+{
+    cout << "\n\t\t\t\t\t      >>>>>>>>>>>>>>>>>>>>>>>>\n";
+    cout << "\t\t\t\t\t      |                |      \n";
+    cout << "\t\t\t\t\t      |  Registration  |      \n";
+    cout << "\t\t\t\t\t      |                |      \n";
+    cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<      \n\n";
+    cout << "\n\t\t\t\t\t                      			";
 }

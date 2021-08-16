@@ -84,12 +84,16 @@ map<int, vector<vector<string>>> readFile(string filename)
 // FUNCTION TO PRINT OUT ALL THE INFORMATION OF A CERTAIN UNIT
 void searchData(map<int, vector<vector<string>>> data, int unit)
 {
+    string datacode[4] = {"Name", "Phone", "Email", "IC"};
     try
     {
+        cout << endl;
         for (int i = 0; i < data.at(unit).size(); i++)
         {
             for (int j = 0; j < data.at(unit)[i].size(); j++)
             {
+                cout << "\t\t\t";
+                cout << left << setw(6) << datacode[j] << ": ";
                 cout << data.at(unit)[i][j] << endl;
             }
             cout << endl;
