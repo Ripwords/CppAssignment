@@ -96,7 +96,7 @@ void display_error_msg(string info_a, string info_b, string &return_option)
     cout <<"\t\t\t\t\t                 || ||             \n";
     cout <<"\t\t\t\t\t                ooO Ooo            \n";
     cout << "___________________________________________________________________________________________________________________\n";
-    cout << "\nEnter 0 (return home page) OR 1 (Try again) >> ";
+    cout << "\nEnter 0 (return MENU option) OR 1 (Try again) >> ";
     cin >> return_option ;
 }
 
@@ -294,12 +294,3 @@ void updateUserDataPrintOut()
     cout << "\t\t\n\tPlease select the option ( 1 / 2 ) to continue >> ";
 }
 
-void display_registration()
-{
-    cout << "\n\t\t\t\t\t      >>>>>>>>>>>>>>>>>>>>>>>>\n";
-    cout << "\t\t\t\t\t      |                |      \n";
-    cout << "\t\t\t\t\t      |  Registration  |      \n";
-    cout << "\t\t\t\t\t      |                |      \n";
-    cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<      \n\n";
-    cout << "\n\t\t\t\t\t                      			";
-}

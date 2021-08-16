@@ -6,6 +6,8 @@
 void searchForResident(map<int, vector<vector<string>>> &data)
 {
     int unitNumber;
+    string return_option;
+
     while (true)
     {
         draw_PARCEL_SYSTEM2();
@@ -15,16 +17,16 @@ void searchForResident(map<int, vector<vector<string>>> &data)
         {
             cin.clear();
             cin.ignore(512, '\n');
-            cout << "Invalid Unit Number, (Y) to try again, (N) to leave" << endl;
-            string YorN;
-            cin >> YorN;
-            if (YorN == "y" || YorN == "Y")
+            void display_error_msg("Unit Number", " ", return_option) ;
+            cin >> return_option;
+            if (return_option == "1")
             {
                 system("cls");
                 continue;
             }
-            else if (YorN == "n" || YorN == "N")
+            else if (return_option == "0")
             {
+                system("cls");
                 return;
             }
             else
@@ -53,7 +55,7 @@ void userRegistration(map<int, vector<vector<string>>> &data)
     string ic;
     while (true)
     {
-        display_registration();
+        display_title("Registration");
         cout << "\n\t\t\t\t\t   Unit Number     : ";
         cin >> unit;
         while (cin.fail())
@@ -62,7 +64,7 @@ void userRegistration(map<int, vector<vector<string>>> &data)
             cin.ignore(512, '\n');
             display_invalid_input();
             system("cls");
-            display_registration();
+            display_title("Registration");
             cout << "\n\t\t\t\t\t   Unit Number     : ";
             cin >> unit;
         }
@@ -479,7 +481,7 @@ void managementLogIn(map<int, vector<vector<string>>> &data, map<int, vector<str
         mang_ID_PS_enter(ManagementID, ManagementPS);
 
         // Functions to check for Management ID and password
-        bool password = ManagementPS.compare(managementPSStandard);
+        bool password = ManagementPS.compare(managementPSStandard); 
         bool ID = ManagementID.compare(managementIDStandard);
 
         if (!ID || !password)
