@@ -138,7 +138,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
     {
         while (true)
         {
-            display_USER_UPDATE();
+            display_title("User Update");
             cout << "\n\t\t\t\t\t                      			";
             cout << "\n\t\t\t\t\t  Please key in the Unit Number   : ";
             cin >> unit;
@@ -218,7 +218,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
         {
             while (true)
             {
-                display_USER_UPDATE();
+                display_title("User Update");
                 cout << "\n\n\t\t\t\t\tPlease enter the old phone number       : ";
                 cin >> currentInfo;
 
@@ -355,7 +355,7 @@ void residentLogIn(map<int, vector<vector<string>>> &data)
 
     // printing out user interface
     draw_PARCEL_SYSTEM2();
-    display_RESIDENT_LOGIN();
+    display_title("RESIDENT LOGIN");
 
     while (true)
     {
@@ -473,7 +473,7 @@ void managementLogIn(map<int, vector<vector<string>>> &data, map<int, vector<str
 
     // printing out user interface
     draw_PARCEL_SYSTEM2();
-    display_MANAGEMENT_LOGIN();
+    display_title("MANAGEMENT LOGIN");
 
     while (true)
     {

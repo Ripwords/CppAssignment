@@ -74,30 +74,13 @@ void display_EditUser(string &choice)
     cin >> choice;
 }
 
-void display_RESIDENT_LOGIN(void)
-{
-    cout << "\n\t\t\t\t\t      >>>>>>>>>>>>>>>>>>>>>>>>\n";
-    cout << "\t\t\t\t\t      |                |      \n";
-    cout << "\t\t\t\t\t      | RESIDENT LOGIN |      \n";
-    cout << "\t\t\t\t\t      |                |      \n";
-    cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<      \n\n";
-}
-void display_MANAGEMENT_LOGIN(void)
+void display_title(string info_a)
 {
     cout << "\n\t\t\t\t\t      >>>>>>>>>>>>>>>>>>>>>>>>>>\n";
     cout << "\t\t\t\t\t      |                  |      \n";
-    cout << "\t\t\t\t\t      | MANAGEMENT LOGIN |      \n";
+    cout << "\t\t\t\t\t      | " << setw(16) << left << info_a << setw(3) << right << "|\n";
     cout << "\t\t\t\t\t      |                  |      \n";
-    cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<<<      \n\n";
-}
-
-void display_USER_UPDATE(void)
-{
-    cout << "\n\t\t\t\t\t      >>>>>>>>>>>>>>>>>>>>>>>>\n";
-    cout << "\t\t\t\t\t      |                |      \n";
-    cout << "\t\t\t\t\t      |  User Update   |      \n";
-    cout << "\t\t\t\t\t      |                |      \n";
-    cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<      \n\n";
+    cout << "\t\t\t\t\t<<<<<<<<<<<<<<<<<<<<<<<<<<      \n\n";    
 }
 
 void display_error_msg(string info_a, string info_b, string &return_option)
@@ -123,7 +106,7 @@ void display_invalid_input(void)
     cout << "\n\t\t\t  /                            \\  ";
     cout << "\n\t\t\t /        Invalid input.        \\ ";
     cout << "\n\t\t\t|                                | ";
-    cout << "\n\t\t\t \\  Please enter to try agian.  / ";
+    cout << "\n\t\t\t \\  Press ENTER to try again.   / ";
     cout << "\n\t\t\t  \\____________________________/  ";
     cout << "\n\t\t\t     \\       /                    ";
     cout << "\n\t\t\t      \\     /                     ";
