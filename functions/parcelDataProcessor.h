@@ -114,6 +114,7 @@ void placeParcel(map<int, vector<string>> &data, int lockerID, string unit, stri
     }
 }
 
+// Pending refactoring
 void retrieveParcel(map<int, vector<vector<string>>> data, map<int, vector<string>> &parcelData, int lockerID, int unit, string phoneNumber, string inputPin)
 {
     while (true)
@@ -199,4 +200,18 @@ void updateParcelDatabase(map<int, vector<string>> &data, string filename)
             }
         }
     }
+}
+
+// Function to check if phone number is in the parcel DATABASE
+int phoneCheck(map<int, vector<string>> &data, string phone)
+{
+    int lockerID = 0;
+    for (pair<int, vector<string>> el : data)
+    {
+        if (phone == data.at(el.first)[2])
+        {
+            lockerID = el.first;
+        }
+    }
+    return lockerID;
 }
