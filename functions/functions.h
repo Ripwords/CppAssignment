@@ -304,40 +304,104 @@ void updateUserData(map<int, vector<vector<string>>> &data)
         break;
     }
     updateData(data, unit, dataCode, update, currentInfo);
-    cout << "Updated\nPress enter to continue" << endl;
+    display_updateSuccessful();
     cin.clear();
     cin.ignore(512, '\n');
     cin.get();
+    system("cls");
 }
 
 // Pending creating user interface
 void deleteUser(map<int, vector<vector<string>>> &data)
 {
     string unit;
+    string name;
+    string phone;
+    string email;
     string ic;
-
-    cin >> unit;
-    cin >> ic;
+    string YorN;
+    while (true)
+    {
+        display_title("Delete User");
+        // display_deleteUser(data, unit, ic, name, phone, email, YorN);
+        if (YorN == "y" || YorN == "Y")
+        {
+            break;
+        }
+        else if (YorN == "n" || YorN == "N")
+        {
+            cout << "Do you want to modify your input? Y or N >> " << endl;
+            string YorN_2;
+            cin >> YorN_2;
+            if (YorN_2 == "Y" || YorN_2 == "y")
+            {
+                system("cls");
+                continue;
+            }
+            else if (YorN_2 == "N" || YorN_2 == "n")
+            {
+                return;
+            }
+        }
+        else
+        {
+            display_invalid_input();
+            return;
+        }
+    }
     deleteFromDatabase(data, stoi(unit), ic);
 }
 
 // Pending creating user interface
-// ! NOT DONE
-void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData, string phone)
+void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData, int unit, string phone)
 {
+    int tries = 3;
     int lockerID = phoneCheck(parcelData, phone);
+    string OTP;
+    if (lockerID == 0)
+    {
+        cout << "You have no parcels waiting for you, if this is a mistake please refer to the management" << endl;
+        return;
+    }
+    while (tries >= 0)
+    {
+        cout << "Please enter your given OTP >> ";
+        cin >> OTP;
+        cout << endl;
+        if (OTP != parcelData[lockerID][3])
+        {
+            cout << "You have entered the wrong One Time Password" << endl;
+            cout << "You have " << tries-- << " tries remaining" << endl;
+            continue;
+        }
+        cout << "Parcel has been retrieved successfully" << endl;
+        retrieveParcel(data, parcelData, lockerID, unit, phone, OTP);
+        cin.clear();
+        cin.ignore(512, '\n');
+        cout << "Press enter to continue >> ";
+        cin.get();
+        system("cls");
+        return;
+    }
+    if (tries == -1)
+    {
+        cin.clear();
+        cin.ignore(512, '\n');
+        cout << "Press enter to continue >> ";
+        cin.get();
+        system("cls");
+    }
 }
 
-void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
+void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData, int unit, string phone)
 {
     // Retrieve parcel, update user information
-    // TODO to be built
     while (true)
     {
         string option;
         display_user_option(option);
         system("cls");
-        if (option != "1" || option != "2")
+        if (option != "1" && option != "2" && option != "3")
         {
             cout << "Please enter a valid selection" << endl;
             continue;
@@ -346,19 +410,23 @@ void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &
         if (option == "1")
         {
             cout << "Parcel Retrieval" << endl;
-
+            parcelRetrieval(data, parcelData, unit, phone);
             continue;
         }
         else if (option == "2")
         {
             cout << "Update Information" << endl;
-
+            updateUserData(data);
             continue;
+        }
+        else if (option == "3")
+        {
+            return;
         }
     }
 }
 
-void residentLogIn(map<int, vector<vector<string>>> &data)
+void residentLogIn(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
 {
     // declaring variables
     int unitNumber;
@@ -367,12 +435,41 @@ void residentLogIn(map<int, vector<vector<string>>> &data)
 
     // printing out user interface
     draw_PARCEL_SYSTEM2();
-    display_title("RESIDENT LOGIN");
 
     while (true)
     {
         // user entering their unit number and phone number
-        user_unit_phone_enter(unitNumber, phoneNumber);
+        display_title("RESIDENT LOGIN");
+        cout << "\n\t\t\t\t\t                      			   		  	";
+        cout << "\n\t\t\t\t\t  Please enter the Unit Number  >> ";
+        cin >> unitNumber;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(512, '\n');
+            system("cls");
+            display_error_msg("Unit Number", "/ Phone Number", return_option);
+
+            if (return_option == "0")
+            {
+                return;
+            }
+            else if (return_option == "1")
+            {
+                system("cls");
+                continue;
+            }
+            else
+            {
+                display_invalid_input();
+                return;
+            }
+            continue;
+        }
+        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t\t\t  Please enter the Phone Number >> ";
+        cin >> phoneNumber;
+        system("cls");
 
         // Functions to check for unit and phone registration
         bool unitChecked = checkRegistration(data, unitNumber);
@@ -380,8 +477,7 @@ void residentLogIn(map<int, vector<vector<string>>> &data)
 
         if (!unitChecked || !phoneChecked)
         {
-            // returns error message that unit is not registered
-            while (return_option != "0" || return_option != "1")
+            while (true)
             {
                 display_error_msg("Unit Number", "/ Phone Number", return_option);
                 system("cls");
@@ -394,14 +490,17 @@ void residentLogIn(map<int, vector<vector<string>>> &data)
                 {
                     break;
                 }
-                continue;
+                else
+                {
+                    display_invalid_input();
+                    return;
+                }
             }
+            continue;
         }
         else if (unitChecked && phoneChecked)
         {
-            // Checks if phone number is in the parcel database
-
-            // userMenu();
+            userMenu(data, parcelData, unitNumber, phoneNumber);
         }
         break;
     }
@@ -421,7 +520,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
         display_management_option(option);
         system("cls");
 
-        if (option != "1" || option != "2" || option != "3" || option != "4" || option != "5")
+        if (option != "1" && option != "2" && option != "3" && option != "4" && option != "5")
         {
             cout << "Please enter a valid selection" << endl;
             continue;
@@ -430,9 +529,63 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
 
         if (option == "1")
         {
-            //TODO write function to place pacel and send sms
-            cout << "Parcel Info" << endl;
-            showEmptyLocker(parcelData);
+            string return_option;
+            int lockerOption;
+            cout << "Place Parcel" << endl;
+            system("cls");
+            while (true)
+            {
+                display_parcel_info(parcelData);
+                cin >> lockerOption;
+                if (cin.fail())
+                {
+                    cin.clear();
+                    cin.ignore(512, '\n');
+                    display_error_msg("Unit Number", " ", return_option);
+                    system("cls");
+                    if (return_option == "0")
+                    {
+                        return;
+                    }
+                    else if (return_option == "1")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        display_invalid_input();
+                        return;
+                    }
+                }
+                if (parcelData[lockerOption][1] != "EMPTY")
+                {
+                    display_error_msg("Unit Number", "is not empty", return_option);
+                    system("cls");
+                    if (return_option == "0")
+                    {
+                        return;
+                    }
+                    else if (return_option == "1")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        display_invalid_input();
+                        return;
+                    }
+                }
+                break;
+            }
+            string userUnit;
+            string userPhone;
+            cout << "Enter resident's unit number >> ";
+            cin >> userUnit;
+            cout << "Enter resident's phone number >> ";
+            cin >> userPhone;
+            string OTP = placeParcel(parcelData, lockerOption, userUnit, userPhone);
+            display_sendSMS(OTP);
+            popUpMsg(OTP, lockerOption);
             system("cls");
             continue;
         }
@@ -454,7 +607,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
         {
             cout << "Update exisiting resident information" << endl;
             string choice;
-            cin >> choice;
+            display_EditUser(choice);
             if (choice == "Change Data")
             {
                 updateUserData(data);

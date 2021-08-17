@@ -121,17 +121,6 @@ void display_invalid_input(void)
     cin.get();
 }
 
-void user_unit_phone_enter(int &unitNumber, string &phoneNumber) //! To be renamed by Bryan
-{
-    cout << "\n\t\t\t\t\t                      			   		  	";
-    cout << "\n\t\t\t\t\t  Please enter the Unit Number  >> ";
-    cin >> unitNumber;
-    cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    cout << "\n\n\t\t\t\t\t  Please enter the Phone Number >> ";
-    cin >> phoneNumber;
-    system("cls");
-}
-
 void mang_ID_PS_enter(string ManagementID, string ManagementPS) //! To be renamed by Bryan
 {
     cout << "\n\t\t\t\t\t                      			";
@@ -143,7 +132,33 @@ void mang_ID_PS_enter(string ManagementID, string ManagementPS) //! To be rename
     system("cls");
 }
 
-void sendSMS(string OTP) //! To be renamed by Bryan
+// void display_deleteUser(map<int, vector<vector<string>>> data, string unit, string ic, string name, string phone, string email, string YorN) //! To be renamed by Bryan
+// {
+//     cout << "\n\t\t\t\t\t                      			";
+//     cout << "\n\t\t\t\t\t   Unit Number       : ";
+//     cin >> unit;
+//     name = data[unit][]
+//     cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+//     cout << "\n\n\t\t\t\t\t   Owner IC Number   : ";
+//     cin >> ic;
+//     system("cls");
+//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+//     cout << "\n\t\t\t\t\t| Unit Number  |  " << setw(23) << left << unit << "| ";
+//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+//     cout << "\n\t\t\t\t\t| Full Name    |  " << setw(23) << left << data << "| ";
+//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+//     cout << "\n\t\t\t\t\t| Phone Number |  " << setw(23) << left << phone << "|";
+//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+//     cout << "\n\t\t\t\t\t| Email Adress |  " << setw(23) << left << email << "|";
+//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+//     cout << "\n\t\t\t\t\t| IC Number    |  " << setw(23) << left << ic << "|   ";
+//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+//     cout << "\n___________________________________________________________________________________________________________________\n";
+//     cout << "Please confirm the information to be DELETED !!! YES (Y) or NO (N) >> ";
+//     cin >> YorN;
+// }
+
+void display_sendSMS(string OTP) //! To be renamed by Bryan
 {
     cout << "\n\t\t\t   _______                   ";
     cout << "\n\t\t\t _|  \\_/  |______________   ";
@@ -159,29 +174,37 @@ void sendSMS(string OTP) //! To be renamed by Bryan
     cout << "\n\t\t\t    /  ************  \\      ";
     cout << "\n\t\t\t  /   **************   \\    ";
     cout << "\n\t\t\t  -----------------------    ";
-    // NEED TO ADD cout << press Enter to go back the Menu
 }
 
-// Send email if the parcel is not collected for 3 days.
-void sendEmail(string OTP) //! To be renamed by Bryan
+void display_updateSuccessful(void)
 {
-    cout << "You have not collected your parcel for 3 days." << endl;
-    cout << "Please collect your parcel with the OTP : " << OTP << endl;
-}
 
-// Parcel is not collected for a week.
-void OneWeek(int periodOfStaying) //! To be renamed by Bryan
-{
-    cout << "You have not colelcted your parcel for " << periodOfStaying << " days." << endl;
-    cout << "Please contact the management for further assist." << endl;
+    cout << "\n\t\t\t     /\\                     ";
+    cout << "\n\t\t\t    /  \\                    ";
+    cout << "\n\t\t\t   /    \\                   ";
+    cout << "\n\t\t\t  /______\\                  ";
+    cout << "\n\t\t\t ___|  |_________________    ";
+    cout << "\n\t\t\t|  _|  |______________   |   ";
+    cout << "\n\t\t\t|  ||__|              |  |   ";
+    cout << "\n\t\t\t|  | User information |  |   ";
+    cout << "\n\t\t\t|  |     has been     |  |   ";
+    cout << "\n\t\t\t|  |   successfully   |  |   ";
+    cout << "\n\t\t\t|  |      UPDATED     |  |   ";
+    cout << "\n\t\t\t|  |__________________|  |   ";
+    cout << "\n\t\t\t|________________________|   ";
+    cout << "\n\t\t\t     _|____________|_        ";
+    cout << "\n\t\t\t    /  ************  \\      ";
+    cout << "\n\t\t\t  /   **************   \\    ";
+    cout << "\n\t\t\t  -----------------------    ";
+    cout << "press Enter to go back Menu >>       ";
 }
 
 void display_management_option(string &option)
 {
-    cout << "\t\t\t\t\t  ______________"    << endl;
-    cout << "\t\t\t\t\t /              \\"  << endl;
-    cout << "\t\t\t\t\t< 1) Parcel info >"  << endl;
-    cout << "\t\t\t\t\t \\______________/"  << endl;
+    cout << "\t\t\t\t\t  _______________" << endl;
+    cout << "\t\t\t\t\t /               \\" << endl;
+    cout << "\t\t\t\t\t< 1) Place Parcel >" << endl;
+    cout << "\t\t\t\t\t \\_______________/" << endl;
     cout << "\t\t\t\t\t\t  ______________"  << endl;
     cout << "\t\t\t\t\t\t /              \\"<< endl;
     cout << "\t\t\t\t\t\t<   2) Search    >"<< endl;
@@ -199,7 +222,7 @@ void display_management_option(string &option)
     cout << "\t\t\t\t\t<    5) Exit     >"  << endl;
     cout << "\t\t\t\t\t \\______________/"  << endl;
     cout << "___________________________________________________________________________________________________________________\n";
-    cout << "\nPlease enter a VALID option (1 / 2 / 3 / 4 / 5) ： " << endl;   
+    cout << "\nPlease enter a VALID option ( 1 / 2 / 3 / 4 / 5 ) : ";
     cin >> option ;
 }
 
@@ -219,7 +242,7 @@ void display_user_option(string &option)
     cout << "\t\t\t\t\t<        3) Exit        >"  << endl;
     cout << "\t\t\t\t\t \\_____________________/"  << endl;
     cout << "___________________________________________________________________________________________________________________\n";
-    cout << "\nPlease enter a VALID option (1 / 2 / 3 ) ： " << endl;   
+    cout << "\nPlease enter a VALID option ( 1 / 2 / 3 ) : ";
     cin >> option ;
 }
 
@@ -258,27 +281,34 @@ void display_parcel_info (map<int, vector<string>> data)
     cout << "Please enter the OCCUPIED locker ID for detail information OR enter the EMPTY locker ID to register the parcel >> ";
 }
 
-void popUpMsg(string OTP)
+void copyToClipBoard(const char *text)
+{
+    const char *output = text;
+    const size_t len = strlen(output) + 1;
+    HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, len);
+    memcpy(GlobalLock(hMem), output, len);
+    GlobalUnlock(hMem);
+    OpenClipboard(0);
+    EmptyClipboard();
+    SetClipboardData(CF_TEXT, hMem);
+    CloseClipboard();
+}
+
+void popUpMsg(string OTP, int lockerID)
 {
     string msg;
-    msg += "\n   _______                   ";
-    msg += "\n _|  \\_/   |_____________   ";
-    msg += "\n| |__/-\\__|_____________|  ";
-    msg += "\n|  |\t\t|  |   ";
-    msg += "\n|  | SMS has been\t|  |   ";
-    msg += "\n|  | sent to user\t|  |   ";
-    msg += "\n|  | phone\t|  |   ";
-    msg += "\n|  | OTP : ";
+    msg += "Parcel System : \n";
+    msg += "\n";
+    msg += "There's a parcel for you!\n";
+    msg += "The parcel is in locker : ";
+    msg += to_string(lockerID);
+    msg += "\n";
+    msg += "\n";
+    msg += "The OTP is : ";
     msg += OTP;
-    msg += "\t|  |";
-    msg += "\n|  |_________________|  |   ";
-    msg += "\n|_____________________|   ";
-    msg += "\n     _|____________|_        ";
-    msg += "\n    /  ************  \\      ";
-    msg += "\n  /   **************   \\    ";
-    msg += "\n  -----------------------    ";
-
-    MessageBoxA(NULL, msg.c_str(), "SMS SENT!", MB_ICONINFORMATION | MB_OK);
+    msg += "\nThe OTP has been copied to your clipboard\n";
+    copyToClipBoard(OTP.c_str());
+    MessageBoxA(NULL, msg.c_str(), "NEW SMS NOTIFICATION!", MB_ICONINFORMATION | MB_OK);
 }
 
 void updateUserDataPrintOut()

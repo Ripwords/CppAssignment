@@ -101,7 +101,7 @@ vector<int> showEmptyLocker(map<int, vector<string>> data)
 }
 
 // TODO Place Parcel Function is only for management's use
-void placeParcel(map<int, vector<string>> &data, int lockerID, string unit, string phoneNumber)
+string placeParcel(map<int, vector<string>> &data, int lockerID, string unit, string phoneNumber)
 {
     if (data[lockerID][1] == "EMPTY")
     {
@@ -110,72 +110,21 @@ void placeParcel(map<int, vector<string>> &data, int lockerID, string unit, stri
         data[lockerID][1] = "OCCUPIED";
         data[lockerID][2] = phoneNumber;
         data[lockerID][3] = OTP;
-        // function to send out the OTP to user to be placed here using the OTP variable
+        return OTP;
     }
 }
 
 // Pending refactoring
 void retrieveParcel(map<int, vector<vector<string>>> data, map<int, vector<string>> &parcelData, int lockerID, int unit, string phoneNumber, string inputPin)
 {
-    while (true)
+    if (checkInfo(data, unit, "phone", phoneNumber))
     {
-        if (checkInfo(data, unit, "phone", phoneNumber))
+        if (inputPin == parcelData[lockerID][3])
         {
-            int tries = 0;
-            while (tries < 3)
-            {
-                if (inputPin == parcelData[lockerID][3])
-                {
-                    parcelData[lockerID][0] = "0";
-                    parcelData[lockerID][1] = "EMPTY";
-                    parcelData[lockerID][2] = "0";
-                    parcelData[lockerID][3] = "000000";
-                    // message after retrieving parcel
-                }
-                else
-                {
-                    // Error message, entered wrong pinNumber
-                    tries++;
-                    char redo;
-                    cin >> redo;
-                    if (cin.fail())
-                    {
-                        cin.clear();
-                        cin.ignore(512, '\n');
-                        // input error message here
-                        continue;
-                    }
-                    if (redo == 'y')
-                    {
-                        continue;
-                    }
-                    else if (redo == 'n')
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-        else
-        {
-            // Entered a unit number of phone number that does not exist, error message here
-            char redo;
-            cin >> redo;
-            if (cin.fail())
-            {
-                cin.clear();
-                cin.ignore(512, '\n');
-                // input error message here
-                continue;
-            }
-            if (redo == 'y')
-            {
-                continue;
-            }
-            else if (redo == 'n')
-            {
-                break;
-            }
+            parcelData[lockerID][0] = "0";
+            parcelData[lockerID][1] = "EMPTY";
+            parcelData[lockerID][2] = "0";
+            parcelData[lockerID][3] = "000000";
         }
     }
 }
