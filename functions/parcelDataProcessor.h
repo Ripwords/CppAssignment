@@ -76,7 +76,8 @@ void showLockerInfo(map<int, vector<string>> data, int lockerID)
             string names[4] = {"Unit", "Status", "Phone Number", "OTP"};
             for (int j = 0; j < 4; j++)
             {
-                cout << "\t\t\t" << left << setw(12) << names[j] << " : " << data[i][j] << endl;
+                cout << "\n___________________________________________________________________________________________________________________\n";
+                cout << "\t\t\t\t" << left << setw(12) << names[j] << " : " << data[i][j] << endl;
             }
             cout << endl;
         }

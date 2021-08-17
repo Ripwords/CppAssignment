@@ -148,7 +148,7 @@ void mang_ID_PS_enter(string &ManagementID, string &ManagementPS) //! To be rena
     system("cls");
 }
 
-void display_deleteUser(string unit, string ic, string YorN) //! To be renamed by Bryan
+void display_deleteUser(string &unit, string &ic, string &YorN) //! To be renamed by Bryan
 {
     cout << "\n\t\t\t\t\t                      			";
     cout << "\n\t\t\t\t\t   Unit Number       : ";
@@ -162,7 +162,7 @@ void display_deleteUser(string unit, string ic, string YorN) //! To be renamed b
     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
     cout << "\n\t\t\t\t\t| IC Number    |  " << setw(23) << left << ic << "|   ";
     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-    cout << "\n___________________________________________________________________________________________________________________\n";
+    cout << "\n___________________________________________________________________________________________________________________\n\n";
     cout << "Please confirm the information to be DELETED !!! YES (Y) or NO (N) >> ";
     cin >> YorN;
 }
