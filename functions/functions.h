@@ -189,9 +189,18 @@ void updateUserData(map<int, vector<vector<string>>> &data)
             {
                 if (!checkRegistration(data, unit))
                 {
-                    cout << "\nUnit is not registered in the database, please refer to management\n\n\t\tPress enter to continue >>" << endl;
+                    cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+                    cout << "\n\t   * |############################################| *";
+                    cout << "\n\t   * |                                            | *";
+                    cout << "\n\t   * |   Unit is not registered in the database   | *";
+                    cout << "\n\t   * |          please refer to management        | *";
+                    cout << "\n\t   * |                                            | *";
+                    cout << "\n\t   * |############################################| *";
+                    cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+                    cout << "\n___________________________________________________________________________________________________________________\n";
                     cin.clear();
                     cin.ignore(512, '\n');
+                    cout << "\n\t\t Press ENTER to return MENU >> ";
                     cin.get();
                     return;
                 }
@@ -359,11 +368,10 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
     int tries = 3;
     int lockerID = phoneCheck(parcelData, phone);
     string OTP;
-    display_title("Parcel Collect");
     if (lockerID == 0)
     {
         cout << "\n\n================================================================" << endl;
-        cout << "* Locker is EMPTY, any question please refer to the management *" << endl;
+        cout << "* Locker is EMPTY, any enquiry please refer to the management *" << endl;
         cout << "================================================================" << endl;
         cin.clear();
         cin.ignore(512, '\n');
@@ -381,17 +389,35 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
         cout << endl;
         if (OTP != parcelData[lockerID][3])
         {
-            cout << "";
-            cout << "INVALID OTP =(" << endl;
-            cout << "You have " << tries-- << " tries remaining" << endl;
+            cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+            cout << "\n\t   * |############################################| *";
+            cout << "\n\t   * |                                            | *";
+            cout << "\n\t   * |                INVALID OTP =(              | *";
+            cout << "\n\t   * |         You have " << tries << " tries remaining         | *";
+            cout << "\n\t   * |                                            | *";
+            cout << "\n\t   * |############################################| *";
+            cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+            cout << "\n___________________________________________________________________________________________________________________\n";
+            cin.clear();
+            cin.ignore(512, '\n');
+            cout << "\n\n\t\t\t Press ENETR to continue >> ";
+            cin.get();
             system("cls");
             continue;
         }
-        cout << "Parcel has been retrieved successfully" << endl;
+        cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+        cout << "\n\t   * |############################################| *";
+        cout << "\n\t   * |                                            | *";
+        cout << "\n\t   * |                 Thank You                  | *";
+        cout << "\n\t   * |   Parcel has been retrieved successfully   | *";
+        cout << "\n\t   * |                                            | *";
+        cout << "\n\t   * |############################################| *";
+        cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+        cout << "\n___________________________________________________________________________________________________________________\n";
         retrieveParcel(data, parcelData, lockerID, unit, phone, OTP);
         cin.clear();
         cin.ignore(512, '\n');
-        cout << "Press enter to continue >> ";
+        cout << "\n\n\t\t\t Press ENTER to exit >> ";
         cin.get();
         system("cls");
         return;
@@ -413,19 +439,18 @@ void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &
         system("cls");
         if (option != "1" && option != "2" && option != "3")
         {
-            cout << "Please enter a valid selection" << endl;
+            display_invalid_input();
+            system("cls");
             continue;
         }
         system("cls");
         if (option == "1")
         {
-            cout << "Parcel Retrieval" << endl;
             parcelRetrieval(data, parcelData, unit, phone);
             continue;
         }
         else if (option == "2")
         {
-            cout << "Update Information" << endl;
             updateUserData(data);
             continue;
         }
@@ -530,7 +555,8 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
 
         if (option != "1" && option != "2" && option != "3" && option != "4" && option != "5")
         {
-            cout << "Please enter a valid selection" << endl;
+            display_invalid_input();
+            system("cls");
             continue;
         }
         system("cls");
@@ -567,7 +593,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                 }
                 if (parcelData[lockerOption][1] != "EMPTY")
                 {
-                    display_error_msg("Unit Number", "is not empty", return_option);
+                    display_error_msg("Locker", "is not empty", return_option);
                     system("cls");
                     if (return_option == "0")
                     {
@@ -631,7 +657,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
         }
         else if (option == "2")
         {
-            cout << "Search Information" << endl;
+            display_title("Search Information");
             string choice;
             display_search(choice);
             system("cls");
@@ -647,7 +673,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                 while (true)
                 {
                     draw_PARCEL_SYSTEM2();
-                    cout << "Search for Locker" << endl;
+                    display_title("Search Locker");
                     cout << "\n\t\t\tPlease enter the Locker ID: ";
                     cin >> lockerNum;
                     if (cin.fail())
@@ -688,14 +714,12 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
         }
         else if (option == "3")
         {
-            cout << "Register New Resident" << endl;
             userRegistration(data);
             system("cls");
             continue;
         }
         else if (option == "4")
         {
-            cout << "Update exisiting resident information" << endl;
             string choice;
             display_EditUser(choice);
             if (choice == "1")

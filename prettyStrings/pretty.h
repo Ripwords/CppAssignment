@@ -235,7 +235,6 @@ void display_management_option(string &option)
     cin >> option ;
 }
 
-// TODO add display_user_option
 void display_user_option(string &option)
 {
     cout << "\t\t\t\t\t  _____________________"    << endl;
