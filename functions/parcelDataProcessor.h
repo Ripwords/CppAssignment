@@ -67,17 +67,24 @@ string generateOTP()
     return OTP;
 }
 
-void showLockerInfo(map<int, vector<string>> data)
+void showLockerInfo(map<int, vector<string>> data, int lockerID)
 {
-    for (int i = 1; i < data.size() + 1; i++)
+    for (int i = 1; i < 31; i++)
     {
-        cout << i << " ";
-        for (int j = 0; j < data[i].size(); j++)
+        if (i == lockerID)
         {
-            cout << data[i][j] << " ";
+            string names[4] = {"Unit", "Status", "Phone Number", "OTP"};
+            for (int j = 0; j < 4; j++)
+            {
+                cout << "\t\t\t" << left << setw(12) << names[j] << " : " << data[i][j] << endl;
+            }
+            cout << endl;
         }
-        cout << endl;
     }
+    cin.clear();
+    cout << "Press enter to continue >> " << endl;
+    cin.ignore(512, '\n');
+    cin.get();
 }
 
 vector<int> showEmptyLocker(map<int, vector<string>> data)
@@ -100,18 +107,18 @@ vector<int> showEmptyLocker(map<int, vector<string>> data)
     return emptyLocker;
 }
 
-// TODO Place Parcel Function is only for management's use
 string placeParcel(map<int, vector<string>> &data, int lockerID, string unit, string phoneNumber)
 {
+    string OTP = "000000";
     if (data[lockerID][1] == "EMPTY")
     {
-        string OTP = generateOTP();
+        OTP = generateOTP();
         data[lockerID][0] = unit;
         data[lockerID][1] = "OCCUPIED";
         data[lockerID][2] = phoneNumber;
         data[lockerID][3] = OTP;
-        return OTP;
     }
+    return OTP;
 }
 
 // Pending refactoring

@@ -74,6 +74,22 @@ void display_EditUser(string &choice)
     cin >> choice;
 }
 
+void display_search(string &choice)
+{
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
+    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
+    cout << "\t\t\t*  Resident (1) *\t\t|\t\t*  Locker (2) *  \n";
+    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
+    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "\t\t\t                 \t\t|                     \n";
+    cout << "___________________________________________________________________________________________________________________\n";
+    cout << "\t\t\n\tPlease select the option ( 1 / 2 ) to continue >> ";
+    cin >> choice;
+}
+
 void display_title(string info_a)
 {
     cout << "\n\t\t\t\t\t      >>>>>>>>>>>>>>>>>>>>>>>>>>\n";
@@ -106,7 +122,7 @@ void display_invalid_input(void)
     cout << "\n\t\t\t  /                            \\  ";
     cout << "\n\t\t\t /        Invalid input.        \\ ";
     cout << "\n\t\t\t|                                | ";
-    cout << "\n\t\t\t \\  Press ENTER to continue.    / ";
+    cout << "\n\t\t\t \\     Press ENTER to exit.     / ";
     cout << "\n\t\t\t  \\____________________________/  ";
     cout << "\n\t\t\t     \\       /                    ";
     cout << "\n\t\t\t      \\     /                     ";
@@ -121,7 +137,7 @@ void display_invalid_input(void)
     cin.get();
 }
 
-void mang_ID_PS_enter(string ManagementID, string ManagementPS) //! To be renamed by Bryan
+void mang_ID_PS_enter(string &ManagementID, string &ManagementPS) //! To be renamed by Bryan
 {
     cout << "\n\t\t\t\t\t                      			";
     cout << "\n\t\t\t\t\t   Management ID  : ";
@@ -132,31 +148,24 @@ void mang_ID_PS_enter(string ManagementID, string ManagementPS) //! To be rename
     system("cls");
 }
 
-// void display_deleteUser(map<int, vector<vector<string>>> data, string unit, string ic, string name, string phone, string email, string YorN) //! To be renamed by Bryan
-// {
-//     cout << "\n\t\t\t\t\t                      			";
-//     cout << "\n\t\t\t\t\t   Unit Number       : ";
-//     cin >> unit;
-//     name = data[unit][]
-//     cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-//     cout << "\n\n\t\t\t\t\t   Owner IC Number   : ";
-//     cin >> ic;
-//     system("cls");
-//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-//     cout << "\n\t\t\t\t\t| Unit Number  |  " << setw(23) << left << unit << "| ";
-//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-//     cout << "\n\t\t\t\t\t| Full Name    |  " << setw(23) << left << data << "| ";
-//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-//     cout << "\n\t\t\t\t\t| Phone Number |  " << setw(23) << left << phone << "|";
-//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-//     cout << "\n\t\t\t\t\t| Email Adress |  " << setw(23) << left << email << "|";
-//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-//     cout << "\n\t\t\t\t\t| IC Number    |  " << setw(23) << left << ic << "|   ";
-//     cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-//     cout << "\n___________________________________________________________________________________________________________________\n";
-//     cout << "Please confirm the information to be DELETED !!! YES (Y) or NO (N) >> ";
-//     cin >> YorN;
-// }
+void display_deleteUser(string unit, string ic, string YorN) //! To be renamed by Bryan
+{
+    cout << "\n\t\t\t\t\t                      			";
+    cout << "\n\t\t\t\t\t   Unit Number       : ";
+    cin >> unit;
+    cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    cout << "\n\n\t\t\t\t\t   Owner IC Number   : ";
+    cin >> ic;
+    system("cls");
+    cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+    cout << "\n\t\t\t\t\t| Unit Number  |  " << setw(23) << left << unit << "| ";
+    cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+    cout << "\n\t\t\t\t\t| IC Number    |  " << setw(23) << left << ic << "|   ";
+    cout << "\n\t\t\t\t\t+----------------------------------------+   ";
+    cout << "\n___________________________________________________________________________________________________________________\n";
+    cout << "Please confirm the information to be DELETED !!! YES (Y) or NO (N) >> ";
+    cin >> YorN;
+}
 
 void display_sendSMS(string OTP) //! To be renamed by Bryan
 {
@@ -278,7 +287,7 @@ void display_parcel_info (map<int, vector<string>> data)
     cout << setw(5+3) << random_1 << setw(12+3) << random_2 << "      ";
     cout << setw(5+3) << random_1 << setw(12+3) << random_2 << "      ";
     cout << "\n___________________________________________________________________________________________________________________\n";
-    cout << "Please enter the OCCUPIED locker ID for detail information OR enter the EMPTY locker ID to register the parcel >> ";
+    cout << "Please enter the EMPTY locker ID to register the parcel >> ";
 }
 
 void copyToClipBoard(const char *text)

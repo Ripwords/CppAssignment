@@ -11,6 +11,7 @@ void searchForResident(map<int, vector<vector<string>>> &data)
     while (true)
     {
         draw_PARCEL_SYSTEM2();
+        cout << "Search for Residents" << endl;
         cout << "\n\t\t\tPlease enter the Unit Number: ";
         cin >> unitNumber;
         if (!checkRegistration(data, unitNumber))
@@ -323,7 +324,7 @@ void deleteUser(map<int, vector<vector<string>>> &data)
     while (true)
     {
         display_title("Delete User");
-        // display_deleteUser(data, unit, ic, name, phone, email, YorN);
+        display_deleteUser(unit, ic, YorN);
         if (YorN == "y" || YorN == "Y")
         {
             break;
@@ -358,20 +359,32 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
     int tries = 3;
     int lockerID = phoneCheck(parcelData, phone);
     string OTP;
+    display_title("Parcel Collect");
     if (lockerID == 0)
     {
-        cout << "You have no parcels waiting for you, if this is a mistake please refer to the management" << endl;
+        cout << "\n\n================================================================" << endl;
+        cout << "* Locker is EMPTY, any question please refer to the management *" << endl;
+        cout << "================================================================" << endl;
+        cin.clear();
+        cin.ignore(512, '\n');
+        cout << "\n\n\t\t\t Press ENETR to exit >> ";
+        cin.get();
+        system("cls");
+
         return;
     }
     while (tries >= 0)
     {
-        cout << "Please enter your given OTP >> ";
+        display_title("Parcel Collect");
+        cout << "\n\t\t\t Please enter your given OTP >> ";
         cin >> OTP;
         cout << endl;
         if (OTP != parcelData[lockerID][3])
         {
-            cout << "You have entered the wrong One Time Password" << endl;
+            cout << "";
+            cout << "INVALID OTP =(" << endl;
             cout << "You have " << tries-- << " tries remaining" << endl;
+            system("cls");
             continue;
         }
         cout << "Parcel has been retrieved successfully" << endl;
@@ -385,10 +398,7 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
     }
     if (tries == -1)
     {
-        cin.clear();
-        cin.ignore(512, '\n');
-        cout << "Press enter to continue >> ";
-        cin.get();
+        display_invalid_input();
         system("cls");
     }
 }
@@ -512,11 +522,9 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
     // declaring variables
     string option;
 
-    // printing out the user interface
-    draw_PARCEL_SYSTEM2();
-
     while (true)
     {
+        draw_PARCEL_SYSTEM2();
         display_management_option(option);
         system("cls");
 
@@ -529,7 +537,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
 
         if (option == "1")
         {
-            string return_option;
+            string return_option = "1";
             int lockerOption;
             cout << "Place Parcel" << endl;
             system("cls");
@@ -545,7 +553,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                     system("cls");
                     if (return_option == "0")
                     {
-                        return;
+                        break;
                     }
                     else if (return_option == "1")
                     {
@@ -554,7 +562,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                     else
                     {
                         display_invalid_input();
-                        return;
+                        break;
                     }
                 }
                 if (parcelData[lockerOption][1] != "EMPTY")
@@ -563,7 +571,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                     system("cls");
                     if (return_option == "0")
                     {
-                        return;
+                        break;
                     }
                     else if (return_option == "1")
                     {
@@ -577,22 +585,104 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                 }
                 break;
             }
-            string userUnit;
-            string userPhone;
-            cout << "Enter resident's unit number >> ";
-            cin >> userUnit;
-            cout << "Enter resident's phone number >> ";
-            cin >> userPhone;
-            string OTP = placeParcel(parcelData, lockerOption, userUnit, userPhone);
-            display_sendSMS(OTP);
-            popUpMsg(OTP, lockerOption);
+            if (return_option == "1")
+            {
+                int userUnit;
+                string userPhone;
+                while (true)
+                {
+                    cout << "Enter resident's unit number >> ";
+                    cin >> userUnit;
+                    if (cin.fail())
+                    {
+                        cin.clear();
+                        cin.ignore(512, '\n');
+                        string return_option;
+                        display_error_msg("Unit Number", " ", return_option);
+                        system("cls");
+                        if (return_option == "0")
+                        {
+                            break;
+                        }
+                        else if (return_option == "1")
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            display_invalid_input();
+                            break;
+                        }
+                    }
+                    if (!checkRegistration(data, userUnit))
+                    {
+                        display_error_msg("Unit Number", " ", return_option);
+                        return;
+                    }
+                }
+                cout << "Enter resident's phone number >> ";
+                cin >> userPhone;
+                string OTP = placeParcel(parcelData, lockerOption, to_string(userUnit), userPhone);
+                display_sendSMS(OTP);
+                popUpMsg(OTP, lockerOption);
+            }
             system("cls");
             continue;
         }
         else if (option == "2")
         {
-            cout << "Seach for Residents" << endl;
-            searchForResident(data);
+            cout << "Search Information" << endl;
+            string choice;
+            display_search(choice);
+            system("cls");
+            if (choice == "1")
+            {
+                searchForResident(data);
+            }
+            else if (choice == "2")
+            {
+                int lockerNum;
+                string return_option;
+
+                while (true)
+                {
+                    draw_PARCEL_SYSTEM2();
+                    cout << "Search for Locker" << endl;
+                    cout << "\n\t\t\tPlease enter the Locker ID: ";
+                    cin >> lockerNum;
+                    if (cin.fail())
+                    {
+                        cin.clear();
+                        cin.ignore(512, '\n');
+                        display_error_msg("Locker Number", " ", return_option);
+                        if (return_option == "1")
+                        {
+                            system("cls");
+                            continue;
+                        }
+                        else if (return_option == "0")
+                        {
+                            system("cls");
+                            break;
+                        }
+                        else
+                        {
+                            display_invalid_input();
+                            return;
+                        }
+                    }
+                    break;
+                }
+                if (lockerNum <= 30 && lockerNum >= 1)
+                {
+                    showLockerInfo(parcelData, lockerNum);
+                }
+                continue;
+            }
+            else
+            {
+                display_invalid_input();
+            }
             system("cls");
             continue;
         }
@@ -608,13 +698,19 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
             cout << "Update exisiting resident information" << endl;
             string choice;
             display_EditUser(choice);
-            if (choice == "Change Data")
+            if (choice == "1")
             {
+                system("cls");
                 updateUserData(data);
             }
-            else if (choice == "Delete Data")
+            else if (choice == "2")
             {
+                system("cls");
                 deleteUser(data);
+            }
+            else
+            {
+                display_invalid_input();
             }
             system("cls");
             continue;
@@ -633,23 +729,21 @@ void managementLogIn(map<int, vector<vector<string>>> &data, map<int, vector<str
     string ManagementID;
     string ManagementPS;
     string return_option;
-    string managementIDStandard = "ID";
-    string managementPSStandard = "PS";
+    string ID = "ID";
+    string PW = "PS";
 
     // printing out user interface
-    draw_PARCEL_SYSTEM2();
-    display_title("MANAGEMENT LOGIN");
 
     while (true)
     {
+        draw_PARCEL_SYSTEM2();
+        display_title("MANAGEMENT LOGIN");
         // management entering their details
         mang_ID_PS_enter(ManagementID, ManagementPS);
 
         // Functions to check for Management ID and password
-        bool password = ManagementPS.compare(managementPSStandard); 
-        bool ID = ManagementID.compare(managementIDStandard);
 
-        if (!ID || !password)
+        if (ManagementID != ID || ManagementPS != PW)
         {
             // returns error messages if management entered the wrong credentials
             while (return_option != "0" || return_option != "1")
@@ -668,9 +762,10 @@ void managementLogIn(map<int, vector<vector<string>>> &data, map<int, vector<str
                 continue;
             }
         }
-        else if (password && ID)
+        else if (PW == ManagementPS && ID == ManagementID)
         {
             managementMenu(data, parcelData);
         }
+        break;
     }
 }
