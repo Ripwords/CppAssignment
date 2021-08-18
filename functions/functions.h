@@ -57,7 +57,7 @@ void userRegistration(map<int, vector<vector<string>>> &data)
     while (true)
     {
         display_title("Registration");
-        cout << "\n\t\t\t\t\t   Unit Number     : ";
+        cout << "\n\t\t\t\t   Unit Number     : ";
         cin >> unit;
         while (cin.fail())
         {
@@ -87,19 +87,19 @@ void userRegistration(map<int, vector<vector<string>>> &data)
             continue;
         }
 
-        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        cout << "\n\n\t\t\t\t\t   Full Name       : ";
+        cout << "\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t\t   Full Name       : ";
         cin.clear();
         cin.ignore(512, '\n');
         getline(cin, name);
-        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        cout << "\n\n\t\t\t\t\t   Phone Number    : ";
+        cout << "\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t\t   Phone Number    : ";
         cin >> phone;
-        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        cout << "\n\n\t\t\t\t\t   Email Adress    : ";
+        cout << "\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t\t   Email Adress    : ";
         cin >> email;
-        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        cout << "\n\n\t\t\t\t\t   IC Number       : ";
+        cout << "\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t\t   IC Number       : ";
         cin >> ic;
         system("cls");
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
@@ -287,7 +287,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
 
                 if (checkInfo(data, unit, "email", currentInfo))
                 {
-                    cout << "\n\n\t\t\tPlease enter the new Email :";
+                    cout << "\n\n\t\t\tPlease enter the new Email       :";
                     cin >> update;
                 }
                 else
@@ -573,6 +573,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
             while (true)
             {
                 display_parcel_info(parcelData);
+                cout << "Please enter the EMPTY locker ID to register the parcel >> ";
                 cin >> lockerOption;
                 if (cin.fail())
                 {
@@ -594,9 +595,29 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                         break;
                     }
                 }
-                if (parcelData[lockerOption][1] != "EMPTY")
+                if (lockerOption > 30 || lockerOption < 1)
                 {
-                    display_error_msg("Locker", "is not empty", return_option);
+                    cin.clear();
+                    cin.ignore(512, '\n');
+                    display_error_msg("Unit Number", " is invalid", return_option);
+                    system("cls");
+                    if (return_option == "0")
+                    {
+                        break;
+                    }
+                    else if (return_option == "1")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        display_invalid_input();
+                        break;
+                    }
+                }
+                if (parcelData[lockerOption][0] != "EMPTY")
+                {
+                    display_error_msg("Locker ID is ", "UNAVAILABLE", return_option);
                     system("cls");
                     if (return_option == "0")
                     {
@@ -616,43 +637,37 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
             }
             if (return_option == "1")
             {
-                int userUnit;
                 string userPhone;
                 while (true)
                 {
-                    cout << "Enter resident's unit number >> ";
-                    cin >> userUnit;
-                    if (cin.fail())
+                    cout << "Enter resident's phone number >> ";
+                    cin >> userPhone;
+                    if (!checkPhoneNumber(data, userPhone))
                     {
                         cin.clear();
                         cin.ignore(512, '\n');
-                        string return_option;
-                        display_error_msg("Unit Number", " ", return_option);
+                        display_error_msg("Phone Number", "is not REGISTERED", return_option);
                         system("cls");
+
                         if (return_option == "0")
                         {
-                            break;
+                            return;
                         }
                         else if (return_option == "1")
                         {
+                            display_parcel_info(parcelData);
                             continue;
                         }
                         else
                         {
                             display_invalid_input();
-                            break;
+                            system("cls");
+                            return;
                         }
-                    }
-                    if (!checkRegistration(data, userUnit))
-                    {
-                        display_error_msg("Unit Number", " ", return_option);
-                        return;
                     }
                     break;
                 }
-                cout << "Enter resident's phone number >> ";
-                cin >> userPhone;
-                string OTP = placeParcel(parcelData, lockerOption, to_string(userUnit), userPhone);
+                string OTP = placeParcel(parcelData, lockerOption, userPhone);
                 display_sendSMS(OTP);
                 popUpMsg(OTP, lockerOption);
             }
@@ -661,7 +676,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
         }
         else if (option == "2")
         {
-            display_title("Search Info");
+            display_title("Searching for..?");
             string choice;
             display_search(choice);
             system("cls");
@@ -700,6 +715,29 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                             display_invalid_input();
                             return;
                         }
+                    }
+                    if (lockerNum > 30 || lockerNum < 1)
+                    {
+                        {
+                        cin.clear();
+                        cin.ignore(512, '\n');
+                        display_error_msg("Locker Number", " ", return_option);
+                        if (return_option == "1")
+                        {
+                            system("cls");
+                            continue;
+                        }
+                        else if (return_option == "0")
+                        {
+                            system("cls");
+                            break;
+                        }
+                        else
+                        {
+                            display_invalid_input();
+                            return;
+                        }
+                    }
                     }
                     break;
                 }

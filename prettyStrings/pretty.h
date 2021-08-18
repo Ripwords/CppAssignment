@@ -44,17 +44,17 @@ void draw_PARCEL_SYSTEM2(void)
 
 void display_selection(string &choice)
 {
-    cout << "\t\t\t                 \t\t|                     \n";
-    cout << "\t\t\t                 \t\t|                     \n";
-    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
-    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
-    cout << "\t\t\t* Manangemnt(M) *\t\t|\t\t* Resident(R) *  \n";
-    cout << "\t\t\t*               *\t\t|\t\t*             *  \n";
-    cout << "\t\t\t*****************\t\t|\t\t***************  \n";
-    cout << "\t\t\t                 \t\t|                     \n";
-    cout << "\t\t\t                 \t\t|                     \n";
-    cout << "___________________________________________________________________________________________________________________\n";
-    cout << "\t\t\n\tPlease select the option (M/R) to continue >> ";
+    cout << "\t                 \t|                 \t\t|                 \n";
+    cout << "\t                 \t|                 \t\t|                 \n";
+    cout << "\t*****************\t|\t***************\t\t|\t***************\n";
+    cout << "\t*               *\t|\t*             *\t\t|\t*             *\n";
+    cout << "\t* Manangemnt(M) *\t|\t* Resident(R) *\t\t|\t*   Exit (E)  *\n";
+    cout << "\t*               *\t|\t*             *\t\t|\t*             *\n";
+    cout << "\t*****************\t|\t***************\t\t|\t***************\n";
+    cout << "\t                 \t|                 \t\t|                 \n";
+    cout << "\t                 \t|                 \t\t|                 \n";
+    cout << "_________________________________________________________________________________________________\n";
+    cout << "\t\t\n\tPlease select the option (M/R/E) to continue >> ";
     cin >> choice;
 }
 
@@ -139,10 +139,9 @@ void display_invalid_input(void)
 
 void mang_ID_PS_enter(string &ManagementID, string &ManagementPS) //! To be renamed by Bryan
 {
-    cout << "\n\t\t\t\t\t                      			";
-    cout << "\n\t\t\t\t\t   Management ID  : ";
+    cout << "\n\n\t\t\t\t\t   Management ID  : ";
     cin >> ManagementID;
-    cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     cout << "\n\n\t\t\t\t\t   Password       : ";
     cin >> ManagementPS;
     system("cls");
@@ -228,7 +227,7 @@ void display_management_option(string &option)
     cout << "\t\t\t\t\t\t \\______________/"<< endl;
     cout << "\t\t\t\t\t  ______________"    << endl;
     cout << "\t\t\t\t\t /              \\"  << endl;
-    cout << "\t\t\t\t\t<    5) Exit     >"  << endl;
+    cout << "\t\t\t\t\t<   5) Log out   >"  << endl;
     cout << "\t\t\t\t\t \\______________/"  << endl;
     cout << "___________________________________________________________________________________________________________________\n";
     cout << "\nPlease enter a VALID option ( 1 / 2 / 3 / 4 / 5 ) : ";
@@ -247,7 +246,7 @@ void display_user_option(string &option)
     cout << "\t\t\t\t\t\t \\_____________________/"<< endl;
     cout << "\t\t\t\t\t  _____________________"    << endl;
     cout << "\t\t\t\t\t /                     \\"  << endl;
-    cout << "\t\t\t\t\t<        3) Exit        >"  << endl;
+    cout << "\t\t\t\t\t<       3) Log out      >"  << endl;
     cout << "\t\t\t\t\t \\_____________________/"  << endl;
     cout << "___________________________________________________________________________________________________________________\n";
     cout << "\nPlease enter a VALID option ( 1 / 2 / 3 ) : ";
@@ -258,6 +257,8 @@ void display_parcel_info (map<int, vector<string>> data)
 {
     string random_1 = "   =======";
     string random_2 = "==================== ";
+    
+    cout << " Parcel Information\n\n";
     cout << "      ID          Status             ";
     cout << "      ID          Status             ";
     cout << "      ID          Status             " << endl;
@@ -275,7 +276,7 @@ void display_parcel_info (map<int, vector<string>> data)
         for (int j=i+1; j < 21 + i + 1; j+=10)
         {
             cout << "   >" << right << setw(3) << j << "    |    ";
-            cout <<setw(12) << data[j][1] << " <       ";
+            cout <<setw(12) << data[j][0] << " <       ";
         }
         cout << endl;
         cout << "   >       |                 <      ";
@@ -285,8 +286,7 @@ void display_parcel_info (map<int, vector<string>> data)
     cout << setw(5+3) << random_1 << setw(12+3) << random_2 << "      ";
     cout << setw(5+3) << random_1 << setw(12+3) << random_2 << "      ";
     cout << setw(5+3) << random_1 << setw(12+3) << random_2 << "      ";
-    cout << "\n___________________________________________________________________________________________________________________\n";
-    cout << "Please enter the EMPTY locker ID to register the parcel >> ";
+    cout << "\n___________________________________________________________________________________________________________________\n\n";
 }
 
 void copyToClipBoard(const char *text)

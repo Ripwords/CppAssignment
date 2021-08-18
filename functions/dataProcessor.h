@@ -295,3 +295,20 @@ bool checkRegistration(map<int, vector<vector<string>>> data, int unit)
     bool unitExist = (data.find(unit) == data.end()) ? false : true;
     return unitExist;
 }
+
+bool checkPhoneNumber(map<int, vector<vector<string>>> data, string phoneNum)
+{
+   for (pair<int, vector<vector<string>>> el : data)
+    {
+        if (phoneNum == el.second[0][1])
+        {
+            return true;
+        }
+        else if (phoneNum == el.second[1][1])
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
