@@ -44,6 +44,7 @@ int main()
         else
         {
             display_invalid_input();
+            system("cls");
             continue;
         }
     }
