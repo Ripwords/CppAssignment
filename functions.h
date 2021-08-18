@@ -416,7 +416,7 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
         cout << "\n\t   * |############################################| *";
         cout << "\n\t   * |                                            | *";
         cout << "\n\t   * |                INVALID OTP =(              | *";
-        cout << "\n\t   * |         You have " << tries << " tries remaining         | *";
+        cout << "\n\t   * |         You have " << tries-- << " tries remaining         | *";
         cout << "\n\t   * |                                            | *";
         cout << "\n\t   * |############################################| *";
         cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
