@@ -1,6 +1,6 @@
 #include "dataProcessor.h"
 #include "parcelDataProcessor.h"
-#include "../prettyStrings/pretty.h"
+#include "pretty.h"
 #include <cctype>
 
 void searchForResident(map<int, vector<vector<string>>> &data)
