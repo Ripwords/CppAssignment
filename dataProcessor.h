@@ -300,15 +300,15 @@ bool checkPhoneNumber(map<int, vector<vector<string>>> data, string phoneNum)
 {
    for (pair<int, vector<vector<string>>> el : data)
     {
-        if (phoneNum == el.second[0][1])
-        {
-            return true;
-        }
-        else if (phoneNum == el.second[1][1])
-        {
-            return true;
-        }
-        return false;
+        cout << el.first << endl;
+        // if (phoneNum.compare(el.second[0][1]) == 0)
+        // {
+        //     return true;
+        // }
+        // else if (phoneNum.compare(el.second[1][1]) == 0)
+        // {
+        //     return true;
+        // }
     }
     return false;
 }

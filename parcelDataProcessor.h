@@ -155,15 +155,16 @@ void updateParcelDatabase(map<int, vector<string>> &data, string filename)
 }
 
 // Function to check if phone number is in the parcel DATABASE
-int phoneCheck(map<int, vector<string>> &data, string phone)
+vector<int> phoneCheck(map<int, vector<string>> &data, string phone)
 {
+    vector<int> output;
     int lockerID = 0;
     for (pair<int, vector<string>> el : data)
     {
         if (phone == data.at(el.first)[1])
         {
-            lockerID = el.first;
+            output.push_back(el.first);
         }
     }
-    return lockerID;
+    return output;
 }

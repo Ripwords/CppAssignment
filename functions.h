@@ -369,9 +369,9 @@ void deleteUser(map<int, vector<vector<string>>> &data)
 void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData, int unit, string phone)
 {
     int tries = 3;
-    int lockerID = phoneCheck(parcelData, phone);
+    vector<int> lockerID = phoneCheck(parcelData, phone);
     string OTP;
-    if (lockerID == 0)
+    if (lockerID.size() == 0)
     {
         cout << "\n\n================================================================" << endl;
         cout << "* Locker is EMPTY, any enquiry please refer to the management *" << endl;
@@ -390,40 +390,43 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
         cout << "\n\t\t\t Please enter your given OTP >> ";
         cin >> OTP;
         cout << endl;
-        if (OTP != parcelData[lockerID][3])
+        for (int i = 0; i < lockerID.size(); i++)
         {
-            cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
-            cout << "\n\t   * |############################################| *";
-            cout << "\n\t   * |                                            | *";
-            cout << "\n\t   * |                INVALID OTP =(              | *";
-            cout << "\n\t   * |         You have " << tries << " tries remaining         | *";
-            cout << "\n\t   * |                                            | *";
-            cout << "\n\t   * |############################################| *";
-            cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
-            cout << "\n___________________________________________________________________________________________________________________\n";
-            cin.clear();
-            cin.ignore(512, '\n');
-            cout << "\n\n\t\t\t Press ENETR to continue >> ";
-            cin.get();
-            system("cls");
-            continue;
+            if (OTP == parcelData[lockerID[i]][2])
+            {
+                cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+                cout << "\n\t   * |############################################| *";
+                cout << "\n\t   * |                                            | *";
+                cout << "\n\t   * |                 Thank You                  | *";
+                cout << "\n\t   * |   Parcel has been retrieved successfully   | *";
+                cout << "\n\t   * |                                            | *";
+                cout << "\n\t   * |############################################| *";
+                cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+                cout << "\n___________________________________________________________________________________________________________________\n";
+                retrieveParcel(data, parcelData, lockerID[i], unit, phone, OTP);
+                cin.clear();
+                cin.ignore(512, '\n');
+                cout << "\n\n\t\t\t Press ENTER to exit >> ";
+                cin.get();
+                system("cls");
+                return;
+            }
         }
         cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
         cout << "\n\t   * |############################################| *";
         cout << "\n\t   * |                                            | *";
-        cout << "\n\t   * |                 Thank You                  | *";
-        cout << "\n\t   * |   Parcel has been retrieved successfully   | *";
+        cout << "\n\t   * |                INVALID OTP =(              | *";
+        cout << "\n\t   * |         You have " << tries << " tries remaining         | *";
         cout << "\n\t   * |                                            | *";
         cout << "\n\t   * |############################################| *";
         cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
         cout << "\n___________________________________________________________________________________________________________________\n";
-        retrieveParcel(data, parcelData, lockerID, unit, phone, OTP);
         cin.clear();
         cin.ignore(512, '\n');
-        cout << "\n\n\t\t\t Press ENTER to exit >> ";
+        cout << "\n\n\t\t\t Press ENETR to continue >> ";
         cin.get();
         system("cls");
-        return;
+        continue;
     }
     if (tries == -1)
     {
