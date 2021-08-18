@@ -373,9 +373,9 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
     string OTP;
     if (lockerID.size() == 0)
     {
-        cout << "\n\n================================================================" << endl;
-        cout << "* Locker is EMPTY, any enquiry please refer to the management *" << endl;
-        cout << "================================================================" << endl;
+        cout << "\n\n\t=====================================================================" << endl;
+        cout << "\t* No parcel is recieved, any enquiry please refer to the management *" << endl;
+        cout << "\t=====================================================================" << endl;
         cin.clear();
         cin.ignore(512, '\n');
         cout << "\n\n\t\t\t Press ENETR to exit >> ";
@@ -602,7 +602,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                 {
                     cin.clear();
                     cin.ignore(512, '\n');
-                    display_error_msg("Unit Number", " is invalid", return_option);
+                    display_error_msg("Locker ID", " ", return_option);
                     system("cls");
                     if (return_option == "0")
                     {
