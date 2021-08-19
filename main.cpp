@@ -16,6 +16,7 @@ int main()
         cin.get();
         system("cls");
         string choice;
+        draw_PARCEL_SYSTEM2();
         display_selection(choice);
         if (choice == "M" || choice == "m")
         {
