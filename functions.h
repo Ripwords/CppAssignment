@@ -96,22 +96,23 @@ void userRegistration(map<int, vector<vector<string>>> &data)
         cout << "\n\n\t\t\t\t   Phone Number    : ";
         cin >> phone;
         cout << "\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        cout << "\n\n\t\t\t\t   Email Adress    : ";
+        cout << "\n\n\t\t\t\t   Email Address   : ";
         cin >> email;
         cout << "\n\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         cout << "\n\n\t\t\t\t   IC Number       : ";
         cin >> ic;
         system("cls");
+        draw_PARCEL_SYSTEM2();
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| Unit Number  |  " << setw(23) << left << unit << "| ";
+        cout << "\n\t\t\t\t\t| Unit Number   |  " << setw(23) << left << unit << "| ";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| Full Name    |  " << setw(23) << left << name << "| ";
+        cout << "\n\t\t\t\t\t| Full Name     |  " << setw(23) << left << name << "| ";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| Phone Number |  " << setw(23) << left << phone << "|";
+        cout << "\n\t\t\t\t\t| Phone Number  |  " << setw(23) << left << phone << "|";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| Email Adress |  " << setw(23) << left << email << "|";
+        cout << "\n\t\t\t\t\t| Email Address |  " << setw(23) << left << email << "|";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
-        cout << "\n\t\t\t\t\t| IC Number    |  " << setw(23) << left << ic << "|   ";
+        cout << "\n\t\t\t\t\t| IC Number     |  " << setw(23) << left << ic << "|   ";
         cout << "\n\t\t\t\t\t+----------------------------------------+   ";
         cout << "\n___________________________________________________________________________________________________________________\n\n";
         string YorN;
@@ -127,7 +128,7 @@ void userRegistration(map<int, vector<vector<string>>> &data)
         }
         else if (YorN == "n" || YorN == "N")
         {
-            cout << "Do you want to modify your information? Y or N >> " << endl;
+            cout << "\nDo you want to modify your information? Y(retry) or N(Exit) >> ";
             string YorN_2;
             cin >> YorN_2;
             if (YorN_2 == "Y" || YorN_2 == "y")
@@ -164,6 +165,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
     {
         while (true)
         {
+            draw_PARCEL_SYSTEM2();
             display_title("User Update");
             cout << "\n\n\t\t\t\t  Please key in the Unit Number   : ";
             cin >> unit;
@@ -195,14 +197,14 @@ void updateUserData(map<int, vector<vector<string>>> &data)
             {
                 if (!checkRegistration(data, unit))
                 {
-                    cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
-                    cout << "\n\t   * |############################################| *";
-                    cout << "\n\t   * |                                            | *";
-                    cout << "\n\t   * |   Unit is not registered in the database   | *";
-                    cout << "\n\t   * |          please refer to management        | *";
-                    cout << "\n\t   * |                                            | *";
-                    cout << "\n\t   * |############################################| *";
-                    cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+                    cout << "\n\t\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+                    cout << "\n\t\t   * |############################################| *";
+                    cout << "\n\t\t   * |                                            | *";
+                    cout << "\n\t\t   * |   Unit is not registered in the database   | *";
+                    cout << "\n\t\t   * |          please refer to management        | *";
+                    cout << "\n\t\t   * |                                            | *";
+                    cout << "\n\t\t   * |############################################| *";
+                    cout << "\n\t\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
                     cout << "\n___________________________________________________________________________________________________________________\n";
                     cin.clear();
                     cin.ignore(512, '\n');
@@ -249,6 +251,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
         {
             while (true)
             {
+                
                 display_title("User Update");
                 cout << "\n\n\t\t\tPlease enter the old phone number       : ";
                 cin >> currentInfo;
@@ -339,15 +342,23 @@ void deleteUser(map<int, vector<vector<string>>> &data)
     string YorN;
     while (true)
     {
+        draw_PARCEL_SYSTEM2();
         display_title("Delete User");
         display_deleteUser(unit, ic, YorN);
         if (YorN == "y" || YorN == "Y")
         {
+            cout << "\n\n\t===============================================================" << endl;
+            cout << "\t**             User Information has been ERASED !            **" << endl;
+            cout << "\t===============================================================" << endl;
+            cin.clear();
+            cin.ignore(512, '\n');
+            cout << "\n\n\t\t\t Press ENETR to exit >> ";
+            cin.get();
             break;
         }
         else if (YorN == "n" || YorN == "N")
         {
-            cout << "Do you want to modify your input? Y or N >> " << endl;
+            cout << "\nDo you still want to modify your input? Y(Retry) or N(Exit) >> ";
             string YorN_2;
             cin >> YorN_2;
             if (YorN_2 == "Y" || YorN_2 == "y")
@@ -771,6 +782,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
         else if (option == "4")
         {
             string choice;
+            display_title("Edit User Info");
             display_EditUser(choice);
             if (choice == "1")
             {
