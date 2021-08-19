@@ -11,8 +11,8 @@ void searchForResident(map<int, vector<vector<string>>> &data)
     while (true)
     {
         draw_PARCEL_SYSTEM2();
-        cout << "Search for Residents" << endl;
-        cout << "\n\t\t\tPlease enter the Unit Number: ";
+        display_title("Search Residents");
+        cout << "\n\n\t\t\tPlease enter the Unit Number: ";
         cin >> unitNumber;
         if (!checkRegistration(data, unitNumber))
         {
