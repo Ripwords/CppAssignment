@@ -534,6 +534,7 @@ void residentLogIn(map<int, vector<vector<string>>> &data, map<int, vector<strin
                 else
                 {
                     display_invalid_input();
+                    system("cls");
                     return;
                 }
             }
