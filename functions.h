@@ -253,7 +253,9 @@ void updateUserData(map<int, vector<vector<string>>> &data)
             {
                 
                 display_title("User Update");
-                cout << "\n\n\t\t\tPlease enter the old phone number       : ";
+                cout << "\n\t\t\t\t\t\t Unit No. < " << unit <<" >";
+                cout << "\n\t\t\t==========================================================\n";
+                cout << "\n\t\t\tPlease enter the old phone number       : ";
                 cin >> currentInfo;
 
                 if (checkInfo(data, unit, "phone", currentInfo))
@@ -289,7 +291,9 @@ void updateUserData(map<int, vector<vector<string>>> &data)
             while (true)
             {
                 display_title("User Update");
-                cout << "\n\n\t\t\tPlease enter the old Email       : ";
+                cout << "\n\t\t\t\t\t\t Unit No. < " << unit <<" >";
+                cout << "\n\t\t\t==========================================================\n";
+                cout << "\n\t\t\tPlease enter the old Email       : ";
                 cin >> currentInfo;
 
                 if (checkInfo(data, unit, "email", currentInfo))
@@ -401,6 +405,7 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
     }
     while (tries >= 0)
     {
+        draw_PARCEL_SYSTEM2();
         display_title("Parcel Collect");
         cout << "\n\t\t\t Please enter your given OTP >> ";
         cin >> OTP;
@@ -409,14 +414,15 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
         {
             if (OTP == parcelData[lockerID[i]][2])
             {
-                cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
-                cout << "\n\t   * |############################################| *";
-                cout << "\n\t   * |                                            | *";
-                cout << "\n\t   * |                 Thank You                  | *";
-                cout << "\n\t   * |   Parcel has been retrieved successfully   | *";
-                cout << "\n\t   * |                                            | *";
-                cout << "\n\t   * |############################################| *";
-                cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+                system("cls");
+                cout << "\n\t\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+                cout << "\n\t\t   * |############################################| *";
+                cout << "\n\t\t   * |                                            | *";
+                cout << "\n\t\t   * |                 Thank You                  | *";
+                cout << "\n\t\t   * |   Parcel has been retrieved successfully   | *";
+                cout << "\n\t\t   * |                                            | *";
+                cout << "\n\t\t   * |############################################| *";
+                cout << "\n\t\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
                 cout << "\n___________________________________________________________________________________________________________________\n";
                 retrieveParcel(data, parcelData, lockerID[i], unit, phone, OTP);
                 cin.clear();
@@ -427,14 +433,14 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
                 return;
             }
         }
-        cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
-        cout << "\n\t   * |############################################| *";
-        cout << "\n\t   * |                                            | *";
-        cout << "\n\t   * |                INVALID OTP =(              | *";
-        cout << "\n\t   * |         You have " << tries-- << " tries remaining         | *";
-        cout << "\n\t   * |                                            | *";
-        cout << "\n\t   * |############################################| *";
-        cout << "\n\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+        cout << "\n\t\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
+        cout << "\n\t\t   * |############################################| *";
+        cout << "\n\t\t   * |                                            | *";
+        cout << "\n\t\t   * |                INVALID OTP =(              | *";
+        cout << "\n\t\t   * |         You have " << tries-- << " tries remaining         | *";
+        cout << "\n\t\t   * |                                            | *";
+        cout << "\n\t\t   * |############################################| *";
+        cout << "\n\t\t   * *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * *";
         cout << "\n___________________________________________________________________________________________________________________\n";
         cin.clear();
         cin.ignore(512, '\n');
@@ -456,6 +462,7 @@ void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &
     while (true)
     {
         string option;
+        draw_PARCEL_SYSTEM2();
         display_user_option(option);
         system("cls");
         if (option != "1" && option != "2" && option != "3")
@@ -495,9 +502,8 @@ void residentLogIn(map<int, vector<vector<string>>> &data, map<int, vector<strin
     while (true)
     {
         // user entering their unit number and phone number
-        display_title("RESIDENT LOGIN");
-        cout << "\n\t\t\t\t\t                      			   		  	";
-        cout << "\n\t\t\t\t\t  Please enter the Unit Number  >> ";
+        display_title("RESIDENT LOGIN");                     			   		  	
+        cout << "\n\n\t\t\t  Please enter the Unit Number  >> ";
         cin >> unitNumber;
         if (cin.fail())
         {
@@ -522,8 +528,8 @@ void residentLogIn(map<int, vector<vector<string>>> &data, map<int, vector<strin
             }
             continue;
         }
-        cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        cout << "\n\n\t\t\t\t\t  Please enter the Phone Number >> ";
+        cout << "\n\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        cout << "\n\n\t\t\t  Please enter the Phone Number >> ";
         cin >> phoneNumber;
         system("cls");
 

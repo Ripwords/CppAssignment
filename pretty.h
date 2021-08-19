@@ -152,7 +152,7 @@ void display_deleteUser(string &unit, string &ic, string &YorN) //! To be rename
     cout << "\n\t\t\t\t\t                      			";
     cout << "\n\t\t\t\t\t   Unit Number       : ";
     cin >> unit;
-    cout << "\n\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    cout << "\n\t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     cout << "\n\n\t\t\t\t\t   Owner IC Number   : ";
     cin >> ic;
     system("cls");

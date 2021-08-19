@@ -80,7 +80,7 @@ void showLockerInfo(map<int, vector<string>> data, int lockerID)
         }
     }
     cin.clear();
-    cout << "Press enter to continue >> " << endl;
+    cout << "Press enter to continue >> ";
     cin.ignore(512, '\n');
     cin.get();
 }
