@@ -184,7 +184,7 @@ void display_sendSMS(string OTP) //! To be renamed by Bryan
     cout << "\n\t\t\t  -----------------------    ";
 }
 
-void display_updateSuccessful(void)
+void display_updateSuccessful(string a)
 {
 
     cout << "\n\t\t\t     /\\                     ";
@@ -197,7 +197,7 @@ void display_updateSuccessful(void)
     cout << "\n\t\t\t|  | User information |  |   ";
     cout << "\n\t\t\t|  |     has been     |  |   ";
     cout << "\n\t\t\t|  |   successfully   |  |   ";
-    cout << "\n\t\t\t|  |      UPDATED     |  |   ";
+    cout << "\n\t\t\t|  |   " << setw(12) << a << "   |  |";
     cout << "\n\t\t\t|  |__________________|  |   ";
     cout << "\n\t\t\t|________________________|   ";
     cout << "\n\t\t\t     _|____________|_        ";

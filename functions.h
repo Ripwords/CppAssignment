@@ -119,6 +119,10 @@ void userRegistration(map<int, vector<vector<string>>> &data)
         cin >> YorN;
         if (YorN == "y" || YorN == "Y")
         {
+            display_updateSuccessful("<REGISTERED>");
+            cin.clear();
+            cin.ignore(512, '\n');
+            cin.get();
             break;
         }
         else if (YorN == "n" || YorN == "N")
@@ -287,7 +291,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
 
                 if (checkInfo(data, unit, "email", currentInfo))
                 {
-                    cout << "\n\n\t\t\tPlease enter the new Email       :";
+                    cout << "\n\n\t\t\tPlease enter the new Email       : ";
                     cin >> update;
                 }
                 else
@@ -317,7 +321,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
         break;
     }
     updateData(data, unit, dataCode, update, currentInfo);
-    display_updateSuccessful();
+    display_updateSuccessful("<UPDATED>");
     cin.clear();
     cin.ignore(512, '\n');
     cin.get();
