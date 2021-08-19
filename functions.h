@@ -291,7 +291,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
 
                 if (checkInfo(data, unit, "email", currentInfo))
                 {
-                    cout << "\n\n\t\t\tPlease enter the new Email       :";
+                    cout << "\n\n\t\t\tPlease enter the new Email       : ";
                     cin >> update;
                 }
                 else
