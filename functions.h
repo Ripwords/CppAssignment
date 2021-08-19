@@ -751,6 +751,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
                 if (lockerNum <= 30 && lockerNum >= 1)
                 {
                     showLockerInfo(parcelData, lockerNum);
+                    system("cls");
                 }
                 continue;
             }
