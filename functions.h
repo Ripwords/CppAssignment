@@ -853,6 +853,7 @@ void managementLogIn(map<int, vector<vector<string>>> &data, map<int, vector<str
                 }
                 continue;
             }
+            continue;
         }
         else if (PW == ManagementPS && ID == ManagementID)
         {
