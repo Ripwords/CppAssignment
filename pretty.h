@@ -5,6 +5,8 @@
 
 using namespace std;
 
+// FUNCTIONS TO PRINT OUT LARGE TEXT ARTS FOR THE USER INTERFACE FUNCTION
+
 void draw_WELCOME(void) 
 { 
     cout << "  \t\t\tw       w   EEEE  LL      CCCC   OOO   M     M   EEEE\n"; 

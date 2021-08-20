@@ -1,7 +1,7 @@
 #include "INCLUDES.h"
 
 // DATA PROCESSING
-// MAPPING INFORMATION TYPE TO DATA CODE FOR EASIER RETRIEVAL OF DATA FROM VECTORS
+// MAPPING INFORMATION TYPE TO DATA CODE FOR EASE OF RETRIEVAL OF DATA FROM VECTORS
 map<string, int> dictionary = {
     {"name", 0},
     {"phone", 1},
@@ -9,6 +9,7 @@ map<string, int> dictionary = {
     {"ic", 3}};
 
 // FUNCTION TO READ DATABASE GIVEN FILENAME AND OUTPUT A MAP DATA STRUCTURE
+
 // STRUCTURE IS IN THE FORM OF:
 // DATA = {
 //     {
@@ -35,6 +36,7 @@ map<int, vector<vector<string>>> readFile(string filename)
 
     map<int, vector<vector<string>>> data;
 
+    // SECONDARY FUNCTION TO PLACE FUNCTION INTO THE DATA STRUCTURE
     auto storeData = [](map<int, vector<vector<string>>> &data, int unit, string name, string phone, string email, string ic)
     {
         if (data[unit][0].size() < 4)
@@ -240,6 +242,7 @@ void updateData(map<int, vector<vector<string>>> &data, int unit, string dataCod
     }
 }
 
+// FUNCTION TO DELETE A USER FROM THE DATABASE
 void deleteFromDatabase(map<int, vector<vector<string>>> &data, int unit, string ic)
 {
     if (checkInfo(data, unit, "ic", ic))
@@ -259,7 +262,32 @@ void deleteFromDatabase(map<int, vector<vector<string>>> &data, int unit, string
     }
 }
 
-// FUNCTION TO UPDATE THE DATABASE ( ONLY RUN THIS AT THE END OF MAINLOOP OR WHEN USERDATA IS MODIFIED FROM "updateData")
+// FUNCTION TO CHECK WHETHER A UNIT EXISTS WITHIN THE DATABASE
+bool checkRegistration(map<int, vector<vector<string>>> data, int unit)
+{
+    bool unitExist = (data.find(unit) == data.end()) ? false : true;
+    return unitExist;
+}
+
+bool checkPhoneNumber(map<int, vector<vector<string>>> data, string phoneNum)
+{
+    for (pair<int, vector<vector<string>>> el : data)
+    {
+        for (int i = 0; i < el.second.size(); i++)
+        {
+            if (el.second[i].size() > 2)
+            {
+                if (phoneNum.compare(el.second[i][1]) == 0)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+// FUNCTION TO UPDATE THE DATABASE TEXTFILE
 void updateUserDatabase(map<int, vector<vector<string>>> &data, string filename)
 {
     ofstream FILE;
@@ -288,28 +316,4 @@ void updateUserDatabase(map<int, vector<vector<string>>> &data, string filename)
     }
 
     FILE.close();
-}
-
-bool checkRegistration(map<int, vector<vector<string>>> data, int unit)
-{
-    bool unitExist = (data.find(unit) == data.end()) ? false : true;
-    return unitExist;
-}
-
-bool checkPhoneNumber(map<int, vector<vector<string>>> data, string phoneNum)
-{
-   for (pair<int, vector<vector<string>>> el : data)
-    {
-        for (int i = 0; i < el.second.size(); i++)
-        {
-            if (el.second[i].size() > 2)
-            {
-                if (phoneNum.compare(el.second[i][1]) == 0)
-                {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
 }

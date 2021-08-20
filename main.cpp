@@ -4,9 +4,11 @@ using namespace std;
 
 int main()
 {
+    // READ THE DATABASE AND STORE THEM IN VARIABLES
     auto data = readFile("database.txt");
     auto parcelData = readParcelData("parcelData.txt");
 
+    // MAIN PROGRAM
     while (true)
     {
         draw_WELCOME();

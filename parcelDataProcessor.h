@@ -1,5 +1,17 @@
 #include "INCLUDES.h"
 
+// FUNCTION TO READ THE PARCEL DATABASE TEXT FILE AND STORE IN DATA STRUCTURE
+// PARCEL DATA IS STORED IN THE FOLLOWING DATA STRUCTURE
+// DATA = {
+//     {
+//         LOCKER_ID, {
+//             CURRENT_STATUS,
+//             PHONE NUMBER,
+//             OTP
+//         }
+//     }
+// }
+
 map<int, vector<string>> readParcelData(string filename)
 {
     // Reading file
@@ -49,6 +61,7 @@ map<int, vector<string>> readParcelData(string filename)
     return data;
 }
 
+// FUNCTION TO GENERATE OTP
 // ONLY to be used in this file
 string generateOTP()
 {
@@ -64,6 +77,7 @@ string generateOTP()
     return OTP;
 }
 
+// FUNCTION TO PRINT OUT ALL THE LOCKER INFORMATION ( FOR MANAGEMENT ONLY )
 void showLockerInfo(map<int, vector<string>> data, int lockerID)
 {
     for (int i = 1; i < 31; i++)
@@ -85,26 +99,7 @@ void showLockerInfo(map<int, vector<string>> data, int lockerID)
     cin.get();
 }
 
-vector<int> showEmptyLocker(map<int, vector<string>> data)
-{
-    vector<int> emptyLocker;
-    for (int i = 1; i < data.size() + 1; i++)
-    {
-        if (data[i][0] == "EMPTY")
-        {
-            cout << i << " ";
-            emptyLocker.push_back(i);
-            for (int j = 0; j < data[i].size(); j++)
-            {
-                cout << data[i][j] << " ";
-            }
-            cout << endl;
-        }
-    }
-    cout << endl;
-    return emptyLocker;
-}
-
+// FUNCTION TO PLACE PARCEL IN THE DATABASE ( FOR MANAGEMENT ONLY )
 string placeParcel(map<int, vector<string>> &data, int lockerID, string phoneNumber)
 {
     string OTP = "000000";
@@ -118,7 +113,7 @@ string placeParcel(map<int, vector<string>> &data, int lockerID, string phoneNum
     return OTP;
 }
 
-// Pending refactoring
+// FUNCTION TO RETRIEVE THE PARCEL, AND UPDATE THE DATABASE ( FOR RESIDENTS ONLY )
 void retrieveParcel(map<int, vector<vector<string>>> data, map<int, vector<string>> &parcelData, int lockerID, int unit, string phoneNumber, string inputPin)
 {
     if (checkInfo(data, unit, "phone", phoneNumber))
@@ -132,6 +127,22 @@ void retrieveParcel(map<int, vector<vector<string>>> data, map<int, vector<strin
     }
 }
 
+// Function to check if phone number is in the parcel DATABASE
+vector<int> phoneCheck(map<int, vector<string>> &data, string phone)
+{
+    vector<int> output;
+    int lockerID = 0;
+    for (pair<int, vector<string>> el : data)
+    {
+        if (phone == data.at(el.first)[1])
+        {
+            output.push_back(el.first);
+        }
+    }
+    return output;
+}
+
+// FUNCTION TO UPDATE THE PARCEL DATABASE TEXT FILE
 void updateParcelDatabase(map<int, vector<string>> &data, string filename)
 {
     ofstream FILE;
@@ -152,19 +163,4 @@ void updateParcelDatabase(map<int, vector<string>> &data, string filename)
             }
         }
     }
-}
-
-// Function to check if phone number is in the parcel DATABASE
-vector<int> phoneCheck(map<int, vector<string>> &data, string phone)
-{
-    vector<int> output;
-    int lockerID = 0;
-    for (pair<int, vector<string>> el : data)
-    {
-        if (phone == data.at(el.first)[1])
-        {
-            output.push_back(el.first);
-        }
-    }
-    return output;
 }

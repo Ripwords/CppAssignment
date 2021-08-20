@@ -3,6 +3,9 @@
 #include "pretty.h"
 #include <cctype>
 
+// FUNCTIONS FOR THE USER INTERFACE
+
+// USER INTERFACE FOR SEARCHING THE RESIDENTS ( FOR MANAGEMENT ONLY )
 void searchForResident(map<int, vector<vector<string>>> &data)
 {
     int unitNumber;
@@ -10,6 +13,7 @@ void searchForResident(map<int, vector<vector<string>>> &data)
 
     while (true)
     {
+        // print out user interface and prompts
         draw_PARCEL_SYSTEM2();
         display_title("Search Residents");
         cout << "\n\n\t\t\tPlease enter the Unit Number: ";
@@ -46,6 +50,7 @@ void searchForResident(map<int, vector<vector<string>>> &data)
     system("cls");
 }
 
+// FUNCTION TO REGISTER NEW USERS IN THE DATABASE ( FOR MANAGEMENT ONLY )
 void userRegistration(map<int, vector<vector<string>>> &data)
 {
     int unit;
@@ -151,7 +156,7 @@ void userRegistration(map<int, vector<vector<string>>> &data)
     registerNew(data, registration);
 }
 
-// FOR MANAGEMENT ONLY
+// FUNCTION TO UPDATE USER DATA
 void updateUserData(map<int, vector<vector<string>>> &data)
 {
     int unit;
@@ -335,7 +340,7 @@ void updateUserData(map<int, vector<vector<string>>> &data)
     system("cls");
 }
 
-// Pending creating user interface
+// FUNCTION TO DELETE A USER FROM THE DATABASE ( FOR MANAGEMENT ONLY )
 void deleteUser(map<int, vector<vector<string>>> &data)
 {
     string unit;
@@ -384,7 +389,7 @@ void deleteUser(map<int, vector<vector<string>>> &data)
     deleteFromDatabase(data, stoi(unit), ic);
 }
 
-// Pending creating user interface
+// RETRIEVE A PARCEL FROM THE LOCKER ( FOR RESIDENTS ONLY )
 void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData, int unit, string phone)
 {
     int tries = 3;
@@ -456,9 +461,9 @@ void parcelRetrieval(map<int, vector<vector<string>>> &data, map<int, vector<str
     }
 }
 
+// THE RESIDENTS' USER INTERFACE FUNCTION
 void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData, int unit, string phone)
 {
-    // Retrieve parcel, update user information
     while (true)
     {
         string option;
@@ -489,6 +494,7 @@ void userMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &
     }
 }
 
+// RESIDENTS' LOG IN USER INTERFACE FUNCTION
 void residentLogIn(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
 {
     // declaring variables
@@ -533,7 +539,6 @@ void residentLogIn(map<int, vector<vector<string>>> &data, map<int, vector<strin
         cin >> phoneNumber;
         system("cls");
 
-        // Functions to check for unit and phone registration
         bool unitChecked = checkRegistration(data, unitNumber);
         bool phoneChecked = checkInfo(data, unitNumber, "phone", phoneNumber);
 
@@ -568,7 +573,7 @@ void residentLogIn(map<int, vector<vector<string>>> &data, map<int, vector<strin
     }
 }
 
-// Pending creating user interface
+// THE MANAGEMENT'S USER INTERFACE FUNCTION
 void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
 {
     // declaring variables
@@ -815,6 +820,7 @@ void managementMenu(map<int, vector<vector<string>>> &data, map<int, vector<stri
     }
 }
 
+// MANAGEMENT'S LOG IN USER INTERFACE FUNCTION
 void managementLogIn(map<int, vector<vector<string>>> &data, map<int, vector<string>> &parcelData)
 {
     // Declaring variables
@@ -824,12 +830,11 @@ void managementLogIn(map<int, vector<vector<string>>> &data, map<int, vector<str
     string ID = "ID";
     string PW = "PS";
 
-    // printing out user interface
-
     while (true)
     {
         draw_PARCEL_SYSTEM2();
         display_title("MANAGEMENT LOGIN");
+
         // management entering their details
         mang_ID_PS_enter(ManagementID, ManagementPS);
 
@@ -857,6 +862,7 @@ void managementLogIn(map<int, vector<vector<string>>> &data, map<int, vector<str
         }
         else if (PW == ManagementPS && ID == ManagementID)
         {
+            // run management menu when the credentials are correct
             managementMenu(data, parcelData);
         }
         break;
